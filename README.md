@@ -45,7 +45,7 @@ There are 600 unique "call_type" strings in the universe of 19,520 records.
 180 unique strings appear 1 time.  
 
 #### The top 12 "call_type" strings and their frequency  
-| Number | string |
+| Occurances | string |
 |:------:|:------:|
 | 390 | 29B1 |
 | 402 | RSALARM |
@@ -182,3 +182,7 @@ Charlie Response=Code 3--Possibly Life Threatening
 Delta Response=Code 3--Life Threatening  
 Echo Response=Code 3--Full Arrest or Imminent Death  
 Omega Response=Code 1--Lowest Priority  
+
+### MPDS Codes  
+http://www.rcfireassoc.org/emd.pdf (18 pages)  
+https://www.parliament.vic.gov.au/images/stories/committees/paec/2016-17_Performance_Outcomes/qons/8_Att_4._Dispatch_Grid_as_at_January_2015_Pre_Dispatch_Grid_Review.pdf (33 pages)  
