@@ -5,6 +5,12 @@ First pass at the raw data from AM.
 This is a subset of the call data. There are 19,520 records. Records include dates from Jan. 2010 through Dec. 2020. 
 Assume that all records are anonymous. 
 
+Ideas for chewing through this data:  
+* Decompose the key value pairs in the 'Unit_Dispatch_Times', 'Unit_Enroute_Times', 'Unit_Arrive_Times', 'Unit_Enroute_To_Hospital_Times', 'Unit_Arrive_At_Hospital_Times' and 'Unit_Clear_Times' into Python dictionaries.  
+* For each row, find each *related* pair/series in the 'Unit_Dispatch_Times', 'Unit_Enroute_Times', 'Unit_Arrive_Times', 'Unit_Enroute_To_Hospital_Times', 'Unit_Arrive_At_Hospital_Times' and 'Unit_Clear_Times'.  
+* For each call duration 'pair' print time series graph of given 'response_level', 'call_type', and 'Time_In_Service' column data.
+
+
 
 ## Data Column Descriptions  
 | Name|Data Type|Description|Notes|
