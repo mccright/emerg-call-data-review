@@ -1,0 +1,551 @@
+EMD Codes
+Code Type Call
+1 Abdominal Pain / Problem
+2 Allergies (Reactions) / Envenomations (Stings, Bites)
+3 Animal Bites / Attacks
+4 Assault / Sexual Assault / Stun Gun
+5 Back Pain (Non-Traumatic or Non-Recent Trauma)
+6 Breathing Problems
+7 Burns (Scalds) / Explosion (Blast)
+8 Carbon Monoxide / Inhalation / Haz Mat / CBRN
+9 Cardiac or Respiratory Arrest / Death
+10 Chest Pain / Chest Discomfort (Non-Traumatic)
+11 Choking
+12 Convulsions / Seizures
+13 Diabetic Problems
+14 Drowning / Near Drowning / Diving / SCUBA Accident
+15 Electrocution / Lightning
+16 Eye Problems / Injuries
+17 Falls
+18 Headache
+19 Heart Problems / AICD
+20 Heat / Cold Exposure
+21 Hemorrhage / Lacerations
+22 Inaccessible Incident / Other Entrapments (Non-traffic)
+23 Overdose / Poisoning (Ingestion)
+24 Pregnancy / Childbirth / Miscarriage
+25 Psychiatric / Abnormal Behavior / Suicide Attempt
+26 Sick Person (Specific Diagnosis)
+27 Stab / Gunshot / Penetrating Trauma
+28 Stroke (CVA) / Transient Ischemic Attack (TIA)
+29 Traffic / Transportation Incidents
+30 Traumatic Injuries (Specific)
+31 Unconscious / Fainting (Near)
+32 Unknown Problems (Person Down)
+33 Transfer / Interfacility / Palliative Care
+34 Automatic Crash Notification
+36 Pandemic/Epidemic/Outbreak
+
+Alpha Response=Code 1--Low Priority
+Bravo Response=Code 2--Mid Priority (calls that may involve First Responders)
+Charlie Response=Code 3--Possibly Life Threatening
+Delta Response=Code 3--Life Threatening
+Echo Response=Code 3--Full Arrest or Imminent Death
+Omega Response=Code 1--Lowest Priority
+
+1 - Abdominal Pain / Problems
+1D1 Not alert
+1D2 Ashen or gray color reported ≥ 50
+1C1 Suspected aortic aneurysm (tearing/ripping pain) ≥ 50
+1C2 Diagnosed aortic aneurysm
+1C3 Fainting or near fainting ≥ 50 y/o
+1C4 Females with fainting or near fainting 12-50
+1C5 Males w/ pain above navel >35
+1C6 Females w/ pain above navel >45
+1A1 Abdominal pain
+1A2 Testicle or groin pain (male)
+
+2 - Allergies (Reactions) / Envenomations (Stings, Bites)
+I=Injection administered or advised, M=Medication administered or advised
+2E1 Ineffective breathing
+2D1 Not alert
+2D2 Difficulty speaking between breaths
+2D3 Swarm attack (bees, wasps, hornets, etc.)
+2D4 Snakebite
+2C1 Difficulty breathing or swallowing
+2C2 History of severe allergic reaction
+2B1 Unknown status (3rd party caller)
+2A1 No difficulty breathing or swallowing
+2A2 Spider bite
+
+3 - Animal Bites / Attacks
+3D1 Arrest
+3D2 Unconscious
+3D3 Not alert
+3D4 Chest or neck injury (with difficulty breathing)
+3D5 Dangerous body area
+3D6 Large animal
+3D7 Exotic animal
+3D8 Mauling or multiple animals
+3D9 Attack in progress
+3B1 Possibly dangerous body part
+3B2 Serious hemorrhage
+3B3 Unknown status (3rd party caller)
+3A1 Not dangerous body area
+3A2 Non-recent injuries >6 hours
+3A3 Superficial injuries
+4 – Assault / Sexual Assault / Stun Gun
+A=Assault, S=Sexual Assault, T=Stun Gun
+4D1 Arrest
+4D2 Unconscious
+4D3 Not alert
+4D4 Chest or neck injury (with difficulty breathing)
+4D5 Multiple victims
+4B1 Possibly dangerous body area
+4B2 Serious hemorrhage
+4B3 Unknown status (3rd party caller)
+4A1 Not dangerous body area with deformity
+4A2 Not dangerous body area
+4A3 Non-recent injuries >6 hours
+
+5 - Back Pain / (Non-traumatic or Non-Recent Trauma)
+5D1 Not alert
+5D2 Ashen or gray color reported ≥50
+5C1 Suspected aortic aneurysm (tearing/ripping pain) ≥50
+5C2 Diagnosed aortic aneurysm
+5C3 Fainting or near fainting ≥50
+5C4 Difficulty breathing
+5A1 Non-traumatic back pain
+5A2 Non-recent (>6 hours) traumatic back pain (w/o priority symptoms)
+6 - Breathing Problems
+A=Asthma, E=COPD (Emphysema, chronic bronchitis), O=Other lung problems
+6E1 Ineffective breathing
+6D1 Not alert
+6D2 Difficulty speaking between breaths
+6D3 Changing color
+6D4 Clammy or cold sweats
+6D5 Tracheostomy (obvious distress)
+6C1 Abnormal breathing
+6C2 Tracheostomy (no obvious distress)
+7 – Burns (Scalds) / Explosion (Blast)
+E=Explosion, F=Fire present, W=Fireworks
+7E1 Person on fire 7A5 Non-recent (≥6 hours) burns/injuries (w/o priority symptoms)
+7D1 Multiple victims 7B2 Unknown status (3rd party caller)
+7D2 Arrest 7A1 Burns <18% BSA
+7D2 Unconscious 7A2 Fire alarm (unknown situation)
+7D4 Not alert 7A3 Minor burns
+7D5 Difficulty speaking between breaths 7A4 Sunburn
+7C1 Building fire w/ persons inside
+7C2 Difficulty breathing
+7C3 Burns >18% BSA
+7B1 Blast injuries (w/o priority symptoms)
+
+8 – Carbon Monoxide / Inhalation / HazMat / CBRN
+C=Chemical, B=Biological, R=Radiological, N=Nuclear, G=Smell of gas/fumes,
+M=Carbon monoxide, S=Suicide attempt (CO), T=Suicide attempt (other toxic substamce)
+8D1 Arrest
+8D2 Unconscious
+8D3 Not alert
+8D4 Difficulty speaking between breaths
+8D5 Multiple victims
+8D6 Unknown status (3rd party caller)
+8C1 Alert w/ difficulty breathing
+8B1 Alert w/o difficulty breathing
+8A1 CO detector alarm (scene contact w/o priority symptoms)
+8A2 CO detector alarm (alarm only, no scene contact)
+
+9 - Cardiac or Respiratory Arrest / Death
+9E1 Not breathing at all
+9E2 Uncertain breathing
+9E3 Hanging
+9E4 Strangulation
+9E5 Suffocation
+9D1 Ineffective breathing
+9D2 Obvious or expected death questionable
+9B1 Obvious death unquestionable
+9Ω1 Expected death unquestionable
+
+10 - Chest Pain / Chest Discomfort (Non-traumatic)
+10D1 Not alert
+10D2 Difficulty speaking between breaths
+10D3 Changing color
+10D4 Clammy or cold sweats
+10D5 Heart attack or angina history
+10C1 Abnormal breathing
+10C2 Cocaine
+10C3 Breathing normally >35 y/o
+10A1 Breathing normally <35 y/o
+
+11 - Choking
+F=Food, O=Object/toy, C=Candy/sweets/gum, M=Milk/liquid, U=Unknown
+11E1 Complete obstruction/ineffective breathing
+11D1 Abnormal breathing (partial obstruction)
+11D2 Not alert
+11A1 Not choking now (can talk or cry, is alert and breathing normally)
+
+12 – Convulsions / Seizures
+E=Epileptic or previous seizure diagnoses
+12D1 Not breathing
+12D2 Continuous or multiple seizures
+12D3 Agonal/ineffective breathing
+12D4 Effective breathing not verified >35 y/o
+12C1 Focal/absence seizure (not alert)
+12C2 Pregnancy
+12C3 Diabetic
+12C4 Not seizing now and effective breathing verified (>6, confirmed no seizure disorder)
+12C5 History of stroke or brain tumor
+12C6 Overdose/poisoning (ingestion)
+12C7 Atypical seizure
+12B1 Breathing regularly not verified <35 y/o
+12A1 Not seizing now & effective breathing verified (known seizure disorder)
+12A2 Not seizing now & effective breathing verified (seizure disorder unknown)
+12A3 Not seizing now & effective breathing verified (≥6, confirmed no seizure disorder)
+12A4 Focal/absence seizure (alert)
+12A5 Impending seizure (aura)
+
+13 - Diabetic Problems
+C=Combative or agressive
+13D1 Unconscious
+13C1 Not alert
+13C2 Abnormal behavior
+13C3 Abnormal breathing
+13A1 Alert and behaving normally
+
+14 – Drowning / Near Drowning / Diving / SCUBA Accident
+D=Diving injury (not underwater), F=Floodwater rescue, I=Ice rescue,
+S=SCUBA accident (not underwater), W=Swift water rescue
+14E1 Arrest (out of water)
+14E2 Underwater (domestic rescue)
+14D1 Unconscious
+14D2 Underwater (specialized rescue)
+14D3 Stranded (specialized rescue)
+14D4 Just resuscitated and/or defibrillated (external)
+14D5 Not alert
+14D6 Suspected neck injury
+14C1 Alert w/ abnormal breathing
+14B1 Alert & breathing normally (injuries or in water)
+14B2 Obvious death (submersion ≥6 hours)
+14B3 Unknown status (3rd party caller)
+14A1 Alert & breathing normally (no injuries and out of water)
+
+15 – Electrocution / Lightning
+E=Electrocution, L=Lightning
+15E1 Not breathing/ineffective breathing
+15D1 Multiple victims
+15D2 Unconscious
+15D3 Not disconnected from power
+15D4 Power not off or hazard present
+15D5 Extreme fall (>30 feet)
+15D6 Long fall (>6 feet)
+15D7 Not alert
+15D8 Abnormal breathing
+15D9 Unknown status (3rd party caller)
+15C1 Alert & breathing normally
+
+16 - Eye Problems / Injuries
+16D1 Not alert
+16B1 Severe eye injuries
+16A1 Moderate eye injuries
+16A2 Minor eye injuries
+16A3 Medical eye problems
+
+
+17 - Falls
+A=Accessibility concerns/difficulty, E=Environmental problems, G=On the ground/floor
+J=Jumper (suicide attempt), P=Public place
+17D1 Extreme falls (>30 feet)
+17D2 Arrest
+17D3 Unconscious
+17D4 Not alert
+17D5 Chest or neck injury (with difficulty breathing)
+17D6 Long fall (>6 feet)
+17B1 Possibly dangerous body area
+17B2 Serious hemorrhage
+17B3 Unknown status (3rd party caller)
+17A1 Not dangerous body area with deformity
+17A2 Not dangerous body area
+17A3 Non-recent injuries >6 hours
+17A4 Public assist (no injury and no priority symptoms)
+
+18 - Headache
+C=Partial evidence (<T hours), D=Partial evidence (>T hours), E=Partial evidence (unk time)
+F=Strong evidence (<T hours), H=Strong evidence (>T hours), I=Strong evidence (unk time)
+J=Clear evidence (<T hours), K=Clear evidence (>T hours), M=Clear evidence (unk time)
+X=No test evidence (<T hours), Y=No test evidence (>T hours), Z=No test evidence (unk time)
+L=<T hours, G=>T hours, U=Unk time
+18C1 Not alert
+18C2 Abnormal breathing
+18C3 Speech problems
+18C4 Sudden onset of severe pain
+18C5 Numbness
+18C6 Paralysis
+18C7 Change in behavior (<3 hours)
+18B1 Unknown status (3rd party caller)
+18A1 Breathing normally
+
+19 - Heart Problems /AICD
+19D1 Not alert 19C6 Heart rate <50 or >130 (without priority symptoms)
+19D2 Difficulty speaking between breaths 19C7 Unknown status (3rd party caller)
+19D3 Changing color 19A1 Heart rate >50 or <130 w/o symptoms
+19D4 Clammy or cold sweats 19A2 Chest pain/discomfort <35 y/o w/o symptoms
+19C5 Just resuscitated and/or defibrillated (external)
+19C1 Firing of AICD
+19C2 Abnormal breathing
+19C3 Chest pain/discomfort >35 y/o
+19C4 Cardiac history
+19C5 Cocaine
+
+20 – Heat / Cold Exposure
+H=Heat exposure, C=Cold exposure
+20D1 Not alert
+20D2 Multiple victims (with priority symptoms)
+20C1 Heart attack or angina history
+20B1 Change in skin color
+20B2 Unknown status (3rd party caller)
+20A1 Alert
+
+21 – Hemorrhage / Lacerations
+M=Medical, T=Trauma
+21D1 Arrest
+21D2 Unconscious
+21D3 Not alert
+21D4 Dangerous hemorrhage
+21D5 Abnormal breathing
+21C1 Hemorrhage through a tube
+21C2 Hemorrhage of dialysis fistula
+21C3 Hemorrhage from varicose veins
+21B1 Possibly dangerous hemorrhage
+21B2 Serious hemorrhage
+21B3 Bleeding disorder
+21B4 Blood thinners
+21A1 Non-dangerous hemorrhage
+21A2 Minor hemorrhage
+
+22 – Inaccessible Incident / Other Entrapments (Non-traffic)
+A=Above ground (>6 ft), B=Below ground (>6 ft), M=Multiple victims
+X=Both above ground and multiple victims, Y=Both below ground and multiple victims
+22D1 Mechanical/machinery/object entrapment
+22D2 Trench collapse
+22D3 Structure collapse
+22D4 Confined space entrapment
+22D5 Inaccessible terrain situation
+22D6 Mudslide/avalanche
+22B1 No longer trapped (unknown injuries)
+22B2 Peripheral entrapment only
+22B3 Unknown status (3rd party caller)
+22A1 No longer trapped (no injuries)
+
+23 - Overdose
+A=Accidental, I=Intentional, V=Violent/combative, W=Weapons
+23D1 Unconscious
+23D2 Changing color
+23C1 Not alert
+23C2 Abnormal breathing
+23C3 Antidepressants (tricyclic)
+23C4 Cocaine, methamphetamine (or derivatives)
+23C5 Narcotics (heroin, methadone, OxyContin, etc.)
+23C6 Acid or alkali (lye)
+23C7 Unknown status (3rd party caller)
+23C8 Poison Control request for response
+23B1 Overdose w/o symptoms
+23Ω1 Poisoning w/o priority symptoms
+
+24 – Pregnancy / Childbirth / Miscarriage
+M=Multiple birth
+24D1 Breech or cord
+24D2 Head visible /out
+24D3 Imminent delivery (>6 months, 24 weeks)
+24D4 3rd trimester bleeding
+24D5 High risk complications
+24D6 Baby born (complications with baby)
+24D7 Baby born (complications with mother)
+24C1 2nd trimester hemorrhage or miscarriage
+24C2 1st trimester serious hemorrhage
+24C3 Abdominal pain/cramping (<6 months/24 weeks and no fetus or tissue)
+24C4 Baby born (no complications)
+24B1 Labor (delivery not imminent, >6 months/24 weeks)
+24B2 Unknown status (3rd party caller)
+24A1 1st trimester hemorrhage or miscarriage
+24Ω1 Waters broken (no contractions or presenting parts)
+
+25 - Psychiatric / Abnormal Behavior / Suicide Attempt
+V=Violent, W=Weapons, B=Both violent and weapons
+25D1 Not alert
+25D2 Dangerous hemorrhage
+25D3 Near hanging, strangulation, or suffocation (alert with breathing difficulty)
+25B1 Serious hemorrhage
+25B2 Non-serious or minor hemorrhage
+25B3 Threatening suicide
+25B4 Jumper (threatening)
+25B5 Near hanging, strangulation, or suffocation (alert w/o breathing difficulty)
+25B6 Unknown status (3rd party caller)
+25A1 Non-suicidal and alert
+25A2 Suicidal (not threatening) and alert
+
+26 - Sick Person (Specific Diagnosis)
+26D1 Not alert
+26C1 Altered level of consciousness
+26C2 Abnormal breathing
+26C3 Sickle cell crisis/Thalassemia
+26C4 Autonomic dysreflexia/hyperreflexia
+26B1 Unknown status (3rd party caller)
+26A1 Non priority symptoms
+26A2 BP abnormality (asymptomatic)
+26A3 Dizziness, vertigo
+26A4 Fever, chills
+26A5 General weakness
+26A6 Nausea
+26A7 New onset of immobility
+26A8 Other pain (non-Omega level)
+26A9 Transportation only
+26A10 Unwell/ill
+26A11 Vomiting
+26A12 Possible meningitis
+26Ω2 Boils 26Ω19 Nervous
+26Ω3 Bumps 26Ω20 Object stuck
+26Ω4 Cannot sleep 26Ω21 Object swallowed
+26Ω5 Cannot urinate 26Ω22 Painful urination
+26Ω6 Catheter problems 26Ω23 Penis problems
+26Ω7 Constipation 26Ω24 Rash/skin disorder
+26Ω8 Cramps/spasms/joint pain 26Ω25 STD
+26Ω9 Cut-off ring request 26Ω26 Sore throat
+26Ω10 Deafness 26Ω27 Toothache
+26Ω11 Defecation/diarrhea 26Ω28 Wound infected
+26Ω12 Earache
+26Ω13 Enema
+26Ω14 Gout
+26Ω15 Hemorrhoids/piles
+26Ω16 Hepatitis
+26Ω17 Hiccups
+26Ω18 Itching
+
+27 – Stab / Gunshot / Penetrating Trauma
+S=Stab, G=Gunshot, P=Penetrating wound (not impaled now), I=Impaled currently
+X=Self-inflicted GSW, Y=Self-inflicted knife/stab wound
+27D1 Arrest
+27D2 Unconscious
+27D3 Not alert
+27D4 Central wounds
+27D5 Multiple wounds
+27D6 Multiple victims
+27B1 Non-recent (>6 hours) single central wound
+27B2 Known single peripheral wound
+27B3 Serious hemorrhage
+27B4 Unknown status (3rd party caller)
+27B5 Obvious death
+27A1 Non-recent (>6 hours) peripheral wounds (w/o priority symptoms)
+
+28 – Stroke (CVA) / Transient Ischemic Attack (TIA)
+C=Partial evidence (<T hours), D=Partial evidence (>T hours), E=Partial evidence (unk time)
+F=Strong evidence (<T hours), H=Strong evidence (>T hours), I=Strong evidence (unk time)
+J=Clear evidence (<T hours), K=Clear evidence (>T hours), M=Clear evidence (unk time)
+X=No test evidence (<T hours), Y=No test evidence (>T hours), Z=No test evidence (unk time)
+L=<T hours, G=>T hours, U=Unk time
+28C1 Not alert
+28C2 Abnormal breathing
+28C3 Sudden speech problems
+28C4 Sudden weakness or numbness (one side)
+28C5 Sudden paralysis or facial droop (one side)
+28C6 Sudden loss of balance or coordination
+28C7 Sudden vision problems
+28C8 Sudden onset of severe headache
+28C9 Stroke history
+28C10 TIA (mini-stroke) history
+28C11 Breathing normally ≥35
+28C12 Unknown status (3rd party caller)
+28A1 Breathing normally <35
+
+29 - Traffic / Transportation Incidents
+U=Unknown number of patients, V=Multiple patients, X=Unknown number of patients and additional response required, Y=Multiple patients and additional response required
+29D1 Major incident
+A=Aircraft, B=Bus, C=Subway/Metro, D=Train, E=Watercraft, F=Multi-vehicle (>10) pileup,
+G=Street car/tram/light rail, H=Vehicle vs building
+29D2 High mechanism
+K=ATV/snowmobile, L=Auto vs bicycle/Auto vs motorcycle, M=Auto vs pedestrian, N=Ejection,
+O=Personal watercraft, P=Rollover, Q=Vehicle off bridge/height, R=Possible death at scene,
+S=Sinking vehicle/Vehicle in floodwater, T=Train/light rail vs pedestrian
+29D3 High velocity impact
+29D4 Haz Mat
+29D5 Pinned (trapped) victim
+29D6 Arrest
+29D7 Unconscious
+29D8 Not alert with noisy breathing (abnormal)
+29D9 Not alert with normal breathing
+29B1 Injuries
+29B2 Serious hemorrhage
+29B3 Other hazards
+29B4 Low mechanism (1st or 2nd party caller)
+29B5 Unknown status (3rd party caller)
+29A1 1st party caller w/ non-dangerous injury
+29A2 No injuries reported (unconfirmed or ≥5 persons involved)
+29Ω1 No injuries (confirmed for all persons up to 4)
+
+30 - Traumatic Injuries (Specific)
+30D1 Arrest
+30D2 Unconscious
+30D3 Not alert
+30D4 Chest or neck injury (with difficulty breathing)
+30D5 High velocity impact/mass injury
+30B1 Possibly dangerous body area
+30B2 Serious hemorrhage
+30B3 Unknown body area (remote patient location)
+30A1 Not dangerous body area with deformity 30A3 Non-recent (>6 hours) injuries (w/o priority symptoms)
+30A2 Not dangerous body area
+
+31 – Unconscious / Fainting (Near)
+31E1 Ineffective breathing
+31D1 Unconscious - agonal/ineffective breathing
+31D2 Unconscious – effective breathing
+31D3 Not alert
+31D4 Changing color
+31C1 Alert w/ abnormal breathing
+31C2 Fainting episode(s) and alert ≥35 (with cardiac history)
+31C3 Female 12-50 w/ abdominal pain
+31A1 Fainting episode(s) and alert ≥35 (w/o cardiac history)
+31A2 Fainting episode(s) and alert <35 (with cardiac history)
+31A3 Fainting episode(s) and alert <35 (w/o cardiac history)
+
+32 – Unknown Problem (Person Down)
+32D1 Life status questionable
+32B1 Standing, moving, sitting, or talking
+32B2 Medical alarm (alert) notifications (no patient information)
+32B3 Unknown status (3rd party caller)
+32B4 Caller’s language not understood (no interpreter)
+
+33 – Transfer / Interfacility / Palliative Care
+T=Transfer/Interfacility, P=Palliative Care
+33D1 Suspected cardiac or respiratory arrest
+33D2 Just resuscitated and/or defibrillated (external)
+33C1 Not alert (acute change)
+33C2 Abnormal breathing (acute onset)
+33C3 Significant hemorrhage
+33C4 Shock
+33C5 Possible acute heart problems or MI (heart attack)
+33C6 Severe pain
+33C7 Emergency response requested
+33A1 Acuity I
+33A2 Acuity II
+33A3 Acuity III
+
+34 - Automatic Crash Notification
+34D1 High mechanism
+H=Auto vs bicycle, I=Auto vs motorcycle, J=Auto vs pedestrian, K=Ejection,
+L=Pinned, M=Rollover, N=Vehicle off bridge/height
+34D2 Unconscious or not alert
+34D3 Not breathing/ineffective breathing
+34D4 Life status questionable
+34B1 Injuries involved
+34B2 Multiple victims (one unit)
+34B3 Multiple victims (additional units)
+34B4 Airbag/other automatic sensor (no voice)
+34B5 Unknown status (3rd party caller)
+34A1 Not dangerous injuries
+34Ω1 No injuries (refer to police)
+
+36 – Pandemic/Epidemic/Outbreak (Surveillance or Triage)
+S=Level 0 (surveillance only, no change in response)
+A=Level 1 (low triage, consider referral of ALPHA cases only)
+B=Level 2 (moderate triage, consider reduces response for CHARLIE cases)
+C=Level 3 (high triage, consider referral of some CHARLIE cases and reduced response for DELTA cases)
+36D1 Ineffective breathing with flu symptoms
+36D2 Difficulty speaking between breaths with flu symptoms
+36D3 Not alert with flu symptoms
+36D4 Changing color with flu symptoms
+36C1 Abnormal breathing with single flu symptom or asthma/COPD
+36C2 Abnormal breathing with multiple flu symptoms
+36C3 Chest pain/discomfort ≥35 with single flu symptom
+36C4 Chest pain/discomfort ≥35 with multiple flu symptoms
+36C5 High risk conditions
+36A1 Chest pain/discomfort <35 with single flu symptom
+36A2 Chest pain/discomfort <35 with multiple flu symptoms
+36A3 Flu symptoms only (cough, fever, chills, sweats, sore throat, vomiting, diarrhea, body aches, etc)
