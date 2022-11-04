@@ -5,6 +5,34 @@ First pass at the raw data from AM.
 This is a subset of the call data. There are 19,520 records. Records include dates from Jan. 2010 through Dec. 2020. 
 Assume that all records are anonymous. 
 
+## Pandas data_frame.info() Summary of This Data
+```terminal
+RangeIndex: 19520 entries, 0 to 19519
+Data columns (total 19 columns):
+ #   Column                          Non-Null Count  Dtype  
+---  ------                          --------------  -----  
+ 0   fdid                            19520 non-null  int64  
+ 1   incident_num                    19520 non-null  int64  
+ 2   incident_date                   19520 non-null  object 
+ 3   Mutual_Aid_FDID                 0 non-null      float64
+ 4   Mutual_Aid_State                0 non-null      float64
+ 5   Mutual_Aid_Incident_Num         0 non-null      float64
+ 6   response_level                  19520 non-null  object 
+ 7   call_type                       19520 non-null  object 
+ 8   Unit_Dispatch_Times             18335 non-null  object 
+ 9   Unit_Enroute_Times              16524 non-null  object 
+ 10  Unit_Arrive_Times               15464 non-null  object 
+ 11  Unit_At_Patient_Times           4341 non-null   object 
+ 12  Unit_Enroute_To_Hospital_Times  8114 non-null   object 
+ 13  Unit_Arrive_At_Hospital_Times   7394 non-null   object 
+ 14  Unit_Staging_Times              0 non-null      float64
+ 15  Unit_Fire_Out_Times             49 non-null     object 
+ 16  Unit_Clear_Times                18277 non-null  object 
+ 17  Time_In_Service                 18379 non-null  object 
+ 18  disposition_remarks             8356 non-null   object 
+dtypes: float64(4), int64(2), object(13)
+```
+
 Ideas for chewing through this data:  
 * Decompose the key value pairs in the 'Unit_Dispatch_Times', 'Unit_Enroute_Times', 'Unit_Arrive_Times', 'Unit_Enroute_To_Hospital_Times', 'Unit_Arrive_At_Hospital_Times' and 'Unit_Clear_Times' into Python dictionaries.  
 * For each row, find each *related* pair/series in the 'Unit_Dispatch_Times', 'Unit_Enroute_Times', 'Unit_Arrive_Times', 'Unit_Enroute_To_Hospital_Times', 'Unit_Arrive_At_Hospital_Times' and 'Unit_Clear_Times'.  
@@ -34,6 +62,7 @@ Ideas for chewing through this data:
 | Unit_Clear_Times | object | str | One or more 'key=value' pairs containing "OrgApparatusAbbreviation"="time" where time is in 24-hour formatted hh:mm:ss. May be NULL. | Convert into Python dictionary |
 | Time_In_Service | object | str | One or more 'key=value' pairs containing "OrgApparatusAbbreviation"="time" where time is in 24-hour formatted hh:mm:ss. May be NULL. | Convert into Python dictionary |
 | disposition_remarks | object |  |  | Remove records containing any of the following in this column: "STORED COMPLAINT DUP:" "(FILE ONLY COMPLAINT)" "TEST" |
+
 
 ## Some Column Data Summarized  
 ### call_type  
