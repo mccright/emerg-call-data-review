@@ -13,7 +13,7 @@ Ideas for chewing through this data:
 
 
 ## Data Column Descriptions  
-| Name|Python Data Type|Data Type|Description|Notes|
+| Name|Python Data Type|Desired Data Type|Description|Notes|
 |:-----:|:-----:|:-----:|:-----:|:-----:|
 | fdid | int64 | int | | |
 | incident_num | int64 | int | | |
