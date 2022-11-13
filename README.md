@@ -5,7 +5,7 @@ First pass at the raw data from AM.
 This is a subset of the call data. There are 19,520 records. Records include dates from Jan. 2010 through Dec. 2020. 
 Assume that all records are anonymous. 
 
-## Pandas data_frame.info() Summary of This Data
+## Pandas data_frame.info() Summary of This Raw Data Without Processing 
 ```terminal
 RangeIndex: 19520 entries, 0 to 19519
 Data columns (total 19 columns):
@@ -34,10 +34,12 @@ dtypes: float64(4), int64(2), object(13)
 ```
 
 Ideas for chewing through this data:  
+* Convert the 'incident_date' strings into datetime objects (*or Pandas date objects*)  
 * Decompose the key value pairs in the 'Unit_Dispatch_Times', 'Unit_Enroute_Times', 'Unit_Arrive_Times', 'Unit_Enroute_To_Hospital_Times', 'Unit_Arrive_At_Hospital_Times' and 'Unit_Clear_Times' into Python dictionaries.  
+* In each dictionary, convert the time string into a datetime object (*or Pandas date objects*).  
 * For each row, find each *related* pair/series in the 'Unit_Dispatch_Times', 'Unit_Enroute_Times', 'Unit_Arrive_Times', 'Unit_Enroute_To_Hospital_Times', 'Unit_Arrive_At_Hospital_Times' and 'Unit_Clear_Times'.  
-* For each call duration 'pair' print time series graph of given 'response_level', 'call_type', and 'Time_In_Service' column data.
-
+* For each call duration 'pair' print time series graph of given 'response_level', 'call_type' and 'Time_In_Service' column data, along with calculated *Response_Time* values.  
+  * Response_Time = ('Unit_Arrive_Times' minus 'Unit_Dispatch_Times')  
 
 
 ## Data Column Descriptions  
