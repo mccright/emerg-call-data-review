@@ -66,9 +66,16 @@ def convert_column_to_date(data_frame):
         # print(f"{type(data_frame.loc[index, 'incident_date'])}")
         # print(temp_incident_date_slice[0])
         # date[temp_incident_date_slice[0]] = datetime.strptime(date['incident_date'], "%Y-%m-%d hh:mm [am|pm]")
-    # Convert the incident_date column to datetime64[ns]
-    data_frame['incident_date'] = pd.to_datetime(data_frame['incident_date'])
-    # print(f'Overview of the data {data_frame.info()}')
+    # Convert the incident_date column to <class 'pandas._libs.tslibs.timestamps.Timestamp'>
+    #   which is also datetime64[ns]
+    # Either of the following approaches works, but pandas barks about it.
+    # data_frame['incident_date'] = pd.to_datetime(data_frame['incident_date'])
+    # This is the second way:
+    data_frame['incident_date'] = pd.to_datetime(data_frame.loc[:, 'incident_date'])
+    # Check the data type:
+    #   print(f"{type(data_frame.loc[index,'incident_date'])}")
+    # Sanity check the columns of data
+    #   print(f'Overview of the data {data_frame.info()}')
     return data_frame
 
 
@@ -107,31 +114,60 @@ if __name__ == '__main__':
     # print(f'Overview of the data {temp_data_frame_w_dates.info()}')
     # data_description(temp_data_frame)
     counter = 0
-    length = len( temp_data_frame_w_dates)
+    length = len(temp_data_frame_w_dates)
     while length > counter:
         # map each to a dictionary
         temp_values = ""
         stringified_unit_dispatch_times = ""
+        stringified_unit_time_in_service_times_dict = ""
         unit_dispatch_times_dict = {}
-        temp_str_dict = {}
+        unit_time_in_service_times_dict = {}
         # Unit_Dispatch_Times is column 8
-        temp_str_dict = temp_data_frame_w_dates.values[counter][8]
-        stringified_unit_dispatch_times = str(temp_str_dict)
+        temp_str_unit_dispatch_dict = temp_data_frame_w_dates.values[counter][8]
+        stringified_unit_dispatch_times = str(temp_str_unit_dispatch_dict)
+        # Time_In_Service is column 17
+        temp_str_unit_time_in_service_dict = temp_data_frame_w_dates.values[counter][17]
+        stringified_unit_time_in_service_dict = str(temp_str_unit_time_in_service_dict)
+        # Up to four prints for debugging
+        # print(f"temp_str_unit_dispatch_dict = {temp_str_unit_dispatch_dict}")
+        # print(f"stringified_unit_dispatch_times = {stringified_unit_dispatch_times}")
+        # print(f"temp_str_unit_time_in_service_dict = {temp_str_unit_time_in_service_dict}")
+        # print(f"stringified_unit_time_in_service_dict = {stringified_unit_time_in_service_dict}")
+        #
+        # Need data in the 'Unit_Dispatch_Times column', the 8th column
+        # Checking the eighth column for 'none' - not very portable
         if temp_data_frame_w_dates.values[counter][8] == "None":
             # Skip the nulls
             counter += 1
             continue
             # using strip() and split()  methods
+        # Also need data in the 'Time_In_Service column', the 17th column
+        # Checking the seventeenth column for 'none' - not very portable
+        if temp_data_frame_w_dates.values[counter][17] == "None":
+            # Skip the nulls
+            counter += 1
+            continue
+        # We confirmed 'Unit_Dispatch_Time' and 'Time_In_Service' data
         else:
+            # get 'response_team=time' pairs from column 8 unit_dispatch_times
             try:
                 unit_dispatch_times_dict = dict((a.strip(), b.strip())
                                                 for a, b in (element.split('=')
                                                              for element in stringified_unit_dispatch_times.split(', ')))
             except Exception as e:
                 print(f'{e}')
+            # Now 17
+            try:
+                unit_time_in_service_times_dict = dict((a.strip(), b.strip())
+                                                for a, b in (element.split('=')
+                                                             for element in stringified_unit_time_in_service_dict.split(', ')))
+            except Exception as e:
+                print(f'{e}')
+            # Print what we learned for debugging
             print(f'Record: {counter}')
+            print("The resultant dictionary is: ", unit_dispatch_times_dict)
             for i in sorted(unit_dispatch_times_dict.keys()):
-                print(f"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\t{i} -> {unit_dispatch_times_dict[i]}")
+                print(f"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\t{i} -> {unit_dispatch_times_dict[i]} and time_in_service was {unit_time_in_service_times_dict[i]}")
             # print("The resultant dictionary is: ", unit_dispatch_times_dict)
             counter += 1
 
@@ -141,6 +177,14 @@ if __name__ == '__main__':
         counter += 1
     """
     # print(f'{emergency_data.head()}')
+    target_file = 'headers.py'
+    try:
+        fprUtil = shutil.which(target_file)
+    except shutil.Error as err:
+        raise Exception(f'{err}')
+    if fprUtil is None:
+        print(f'Did not find {target_file} in the path. Returned: {fprUtil}')
+    else:
+        print(f'Found: {fprUtil}')
 
-
-
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
