@@ -223,3 +223,12 @@ Omega Response=Code 1--Lowest Priority
 ### MPDS Codes  
 http://www.rcfireassoc.org/emd.pdf (18 pages)  
 https://www.parliament.vic.gov.au/images/stories/committees/paec/2016-17_Performance_Outcomes/qons/8_Att_4._Dispatch_Grid_as_at_January_2015_Pre_Dispatch_Grid_Review.pdf (33 pages)  
+
+
+### ToDo:  
+Try writing the scripting so that it can be hosted using Pynecone - "performant, customizable web apps in pure Python."  https://github.com/pynecone-io/pynecone  
+>Pynecone is a full-stack Python framework that makes it easy to build and deploy web apps in minutes. All the information for getting started can be found in this README. However, a more detailed explanation of the following topics can be found on our website:  
+https://pynecone.io/docs/getting-started/introduction  
+https://pynecone.io/docs/library  
+https://pynecone.io/docs/hosting/deploy  
+https://pynecone.io/docs/gallery  
