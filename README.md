@@ -41,6 +41,7 @@ Ideas for chewing through this data:
 * For each call duration 'pair' print time series graph of given 'response_level', 'call_type' and 'Time_In_Service' column data, along with calculated *Response_Time* values.  
   * Response_Time = ('Unit_Arrive_Times' minus 'Unit_Dispatch_Times')  
 
+Because the "Unit" is a key identifier, we need to create a Python list of Unit Names.  Then as we iterate through data about each "Unit" we check if that Unit is already in our 'Unit_List" and if not, append it to that list.
 
 ## Data Column Descriptions  
 | Name|Python Data Type|Desired Data Type|Description|Notes|
