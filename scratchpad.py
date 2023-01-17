@@ -15,16 +15,13 @@
 #  Unit_Clear_Times --> isolate "team" and "time" components
 #  Time_In_Service --> isolate "team" and "time" components
 
+from pathlib import Path
 import ast
 import sys
 import pandas as pd
 import datetime
 import numpy as np
 import shutil
-
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
 def minimum_py(min_python_major_version=3, min_python_minor_version=10):
@@ -61,11 +58,6 @@ def convert_column_to_date(data_frame):
         data_frame.loc[index, 'incident_date'] = temp_incident_date.split(' ', 1)[0]
         ### data_frame.loc[index, 'incident_date'] = pd.to_datetime(data_frame.loc[index, 'incident_date']) # # datetime.datetime.strptime(data_frame.loc[index, 'incident_date'], "%m/%d/%y")
         # print(f'Overview of the data {data_frame.info()}')
-        # print(f"{(data_frame.loc[index, 'incident_date']).strftime('%d/%m/%y')}")
-        # print(f"{(data_frame.loc[index, 'incident_date'])}")
-        # print(f"{type(data_frame.loc[index, 'incident_date'])}")
-        # print(temp_incident_date_slice[0])
-        # date[temp_incident_date_slice[0]] = datetime.strptime(date['incident_date'], "%Y-%m-%d hh:mm [am|pm]")
     # Convert the incident_date column to <class 'pandas._libs.tslibs.timestamps.Timestamp'>
     #   which is also datetime64[ns]
     # Either of the following approaches works, but pandas barks about it.
@@ -101,16 +93,20 @@ if __name__ == '__main__':
     minimum_py(min_major_version, min_minor_version)
     # Get the csv file and assign it to a dataframe called emergency_data
     # Enter the path to the raw data file here:
-    e_data_file = './rawdata/rvfd-calls-for-service-2010-2020.csv'
+    e_data_file = Path("./rawdata/rvfd-calls-for-service-2010-2020.csv")
     # Read the data into a Pandas dataframe
-    emergency_data = pd.read_csv(e_data_file, sep=',')
+    if e_data_file.exists():
+        emergency_data = pd.read_csv(e_data_file, sep=',')
     # replacing nan values in Unit_Dispatch_Times with "None"
     # From: https://www.geeksforgeeks.org/python-pandas-dataframe-fillna-to-replace-null-values-in-dataframe/
     emergency_data["Unit_Dispatch_Times"].fillna("None", inplace=True)
     # How many rows & columns are there? What are the column names & types?
     # data_description(emergency_data)
     temp_data_frame = emergency_data.head(10)
-    temp_data_frame_w_dates = pd.DataFrame(convert_column_to_date(temp_data_frame))
+    # We need the .copy() below to stop Pandas from complaining with
+    # "SettingWithCopyWarning" for the pd.to_datetime in convert_column_to_date()
+    # See: https://stackoverflow.com/questions/71458707/pandas-settingwithcopywarning-for-pd-to-datetime
+    temp_data_frame_w_dates = pd.DataFrame(convert_column_to_date(temp_data_frame.copy()))
     # print(f'Overview of the data {temp_data_frame_w_dates.info()}')
     # data_description(temp_data_frame)
     counter = 0
@@ -118,8 +114,9 @@ if __name__ == '__main__':
     while length > counter:
         # map each to a dictionary
         temp_values = ""
-        stringified_unit_dispatch_times = ""
-        stringified_unit_time_in_service_times_dict = ""
+        stringified_unit_dispatch_times: str = ""
+        # stringified_unit_dispatch_times = ""
+        stringified_unit_time_in_service_times_dict: str = ""
         unit_dispatch_times_dict = {}
         unit_time_in_service_times_dict = {}
         # Unit_Dispatch_Times is column 8
@@ -168,23 +165,10 @@ if __name__ == '__main__':
             print("The resultant dictionary is: ", unit_dispatch_times_dict)
             for i in sorted(unit_dispatch_times_dict.keys()):
                 print(f"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\t{i} -> {unit_dispatch_times_dict[i]} and time_in_service was {unit_time_in_service_times_dict[i]}")
+                print(f"\"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\",\"{i}\",\"{unit_dispatch_times_dict[i]}\",\"{unit_time_in_service_times_dict[i]}\"")
+                # print(f"The type for {unit_dispatch_times_dict[i]} is {type(unit_dispatch_times_dict[i])}")
+                diff = unit_dispatch_times_dict[i] + unit_time_in_service_times_dict[i]
+                # Print the difference in days, hours, minutes, and seconds
+                print(f"The difference is {diff}")
             # print("The resultant dictionary is: ", unit_dispatch_times_dict)
             counter += 1
-
-        """
-        for key in temp_dict:
-            print(f'{type(key)}')
-        counter += 1
-    """
-    # print(f'{emergency_data.head()}')
-    target_file = 'headers.py'
-    try:
-        fprUtil = shutil.which(target_file)
-    except shutil.Error as err:
-        raise Exception(f'{err}')
-    if fprUtil is None:
-        print(f'Did not find {target_file} in the path. Returned: {fprUtil}')
-    else:
-        print(f'Found: {fprUtil}')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
