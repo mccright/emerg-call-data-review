@@ -18,10 +18,29 @@
 from pathlib import Path
 import ast
 import sys
+import os
 import pandas as pd
 import datetime
 import numpy as np
 import shutil
+
+
+start = datetime.datetime.now()
+dir_path = os.getcwd()
+
+
+def create_target_csv_data_file(csvfile_suffix: object) -> object:
+    # create a file with date as a name day-month-year
+    filename_suffix = csvfile_suffix
+    filename_prefix = start.strftime('%Y-%m-%d')
+    filename = f"{filename_prefix}_{filename_suffix}"
+    # Put the new file in the current directory
+    csv_file_name: str = os.path.join(dir_path, filename)
+    return csv_file_name
+
+
+# Press Shift+F10 to execute it or replace it with your code.
+# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
 def minimum_py(min_python_major_version=3, min_python_minor_version=10):
@@ -35,6 +54,29 @@ def minimum_py(min_python_major_version=3, min_python_minor_version=10):
 def print_separator_line():
     print(f'- - - - - - - - - - - - - - - - - - - - - - - -')
 
+
+def report_start(dirpath):
+    # Documenting the start & end time
+    print("\r\n")
+    print_separator_line()
+    # print("-------------------------------------------------------------")
+    print(__file__ + " Report started at: %s" % start)
+    print("Root of target filesystem: %s" % dirpath)
+    print_separator_line()
+    # print("-------------------------------------------------------------")
+    ## print("\r\n")
+
+
+def report_end(csvfile):
+    script_ended = datetime.datetime.now()
+    print_separator_line()
+    # print("-------------------------------------------------------------")
+    print(__file__ + " Report ended at: %s" % script_ended)
+    print("Search Report took: %s " % str(script_ended - start))
+    print("Target Report Files: %s" % csvfile)
+    print_separator_line()
+    # print("-------------------------------------------------------------")
+    print("\r\n")
 
 def data_description(data_frame):
     # Overview of the data:
@@ -58,6 +100,11 @@ def convert_column_to_date(data_frame):
         data_frame.loc[index, 'incident_date'] = temp_incident_date.split(' ', 1)[0]
         ### data_frame.loc[index, 'incident_date'] = pd.to_datetime(data_frame.loc[index, 'incident_date']) # # datetime.datetime.strptime(data_frame.loc[index, 'incident_date'], "%m/%d/%y")
         # print(f'Overview of the data {data_frame.info()}')
+        # print(f"{(data_frame.loc[index, 'incident_date']).strftime('%d/%m/%y')}")
+        # print(f"{(data_frame.loc[index, 'incident_date'])}")
+        # print(f"{type(data_frame.loc[index, 'incident_date'])}")
+        # print(temp_incident_date_slice[0])
+        # date[temp_incident_date_slice[0]] = datetime.strptime(date['incident_date'], "%Y-%m-%d hh:mm [am|pm]")
     # Convert the incident_date column to <class 'pandas._libs.tslibs.timestamps.Timestamp'>
     #   which is also datetime64[ns]
     # Either of the following approaches works, but pandas barks about it.
@@ -91,9 +138,15 @@ if __name__ == '__main__':
     min_major_version = 3
     min_minor_version = 10
     minimum_py(min_major_version, min_minor_version)
-    # Get the csv file and assign it to a dataframe called emergency_data
+    # Use a set: collection of unordered unique elements without duplicates {}
+    emergency_data_list = []
+    report_start(dir_path)
+    csv_data_filename_suffix: str = 'emerg_data_organized.csv'
+    csv_data_filename: str = create_target_csv_data_file(csv_data_filename_suffix)
+    # Get the source csv file and assign it to a dataframe called emergency_data
     # Enter the path to the raw data file here:
     e_data_file = Path("./rawdata/rvfd-calls-for-service-2010-2020.csv")
+    # e_data_file = './rawdata/rvfd-calls-for-service-2010-2020.csv'
     # Read the data into a Pandas dataframe
     if e_data_file.exists():
         emergency_data = pd.read_csv(e_data_file, sep=',')
@@ -102,7 +155,8 @@ if __name__ == '__main__':
     emergency_data["Unit_Dispatch_Times"].fillna("None", inplace=True)
     # How many rows & columns are there? What are the column names & types?
     # data_description(emergency_data)
-    temp_data_frame = emergency_data.head(10)
+    ## temp_data_frame = emergency_data.head(10)
+    temp_data_frame = emergency_data
     # We need the .copy() below to stop Pandas from complaining with
     # "SettingWithCopyWarning" for the pd.to_datetime in convert_column_to_date()
     # See: https://stackoverflow.com/questions/71458707/pandas-settingwithcopywarning-for-pd-to-datetime
@@ -162,13 +216,26 @@ if __name__ == '__main__':
                 print(f'{e}')
             # Print what we learned for debugging
             print(f'Record: {counter}')
-            print("The resultant dictionary is: ", unit_dispatch_times_dict)
+            ## print("The resultant dictionary is: ", unit_dispatch_times_dict)
             for i in sorted(unit_dispatch_times_dict.keys()):
-                print(f"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\t{i} -> {unit_dispatch_times_dict[i]} and time_in_service was {unit_time_in_service_times_dict[i]}")
-                print(f"\"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\",\"{i}\",\"{unit_dispatch_times_dict[i]}\",\"{unit_time_in_service_times_dict[i]}\"")
+                ## print(f"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\t{i} -> {unit_dispatch_times_dict[i]} and time_in_service was {unit_time_in_service_times_dict[i]}")
+                csv_string = f"\"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\",\"{i}\",\"{unit_dispatch_times_dict[i]}\",\"{unit_time_in_service_times_dict[i]}\"\n"
+                emergency_data_list.append(csv_string)
                 # print(f"The type for {unit_dispatch_times_dict[i]} is {type(unit_dispatch_times_dict[i])}")
                 diff = unit_dispatch_times_dict[i] + unit_time_in_service_times_dict[i]
                 # Print the difference in days, hours, minutes, and seconds
-                print(f"The difference is {diff}")
+                ## print(f"The difference is {diff}")
             # print("The resultant dictionary is: ", unit_dispatch_times_dict)
             counter += 1
+
+    # create a text file for writing
+    with open(csv_data_filename, 'a') as f:
+        # dump the data into the CSV file
+        f.writelines(emergency_data_list)
+
+        """
+        for key in temp_dict:
+            print(f'{type(key)}')
+        counter += 1
+    """
+
