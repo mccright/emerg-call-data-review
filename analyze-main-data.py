@@ -3,7 +3,7 @@
 #    for a while.  The *_time columns are a mess.
 #  incident_date --> remove bogus time, convert date to pd.date
 #  response_level
-#  call_type
+#  call_type --> See: https://en.wikipedia.org/wiki/Medical_Priority_Dispatch_System
 #  Unit_Dispatch_Times --> isolate "team" and "time" components
 #  Unit_Enroute_Times --> isolate "team" and "time" components
 #  Unit_Arrive_Times --> isolate "team" and "time" components
@@ -107,10 +107,16 @@ def data_description(data_frame):
     print(f"{desc}")
     print_separator_line()
     #
-    desc = temp_data_frame_w_dates["response_unit"].describe(percentiles=perc, include=include, datetime_is_numeric=True)
-    # desc = temp_data_frame_w_dates.response_unit.describe(percentiles=perc, include=include, datetime_is_numeric=True)
+    desc = temp_data_frame_w_dates["response_unit"].describe(percentiles=perc, include=include)
     # per: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html
     print(f"{desc}")
+
+    print_separator_line()
+    #
+    desc = temp_data_frame_w_dates["call_type"].describe(percentiles=perc, include=include)
+    # per: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html
+    print(f"{desc}")
+
     print_separator_line()
     #
     desc = temp_data_frame_w_dates["dispatch_time"].describe(percentiles=perc, include=include, datetime_is_numeric=True)
@@ -133,13 +139,6 @@ def convert_column_to_date(data_frame):
         # Remove the bogus date from the time_in_service column
         temp_time_in_service = f"{data_frame.loc[index, 'time_in_service']}"
         data_frame.loc[index, 'time_in_service'] = temp_time_in_service.split(' ', 1)[0]
-        ### data_frame.loc[index, 'incident_date'] = pd.to_datetime(data_frame.loc[index, 'incident_date']) # # datetime.datetime.strptime(data_frame.loc[index, 'incident_date'], "%m/%d/%y")
-        # print(f'Overview of the data {data_frame.info()}')
-        # print(f"{(data_frame.loc[index, 'incident_date']).strftime('%d/%m/%y')}")
-        # print(f"{(data_frame.loc[index, 'incident_date'])}")
-        # print(f"{type(data_frame.loc[index, 'incident_date'])}")
-        # print(temp_incident_date_slice[0])
-        # date[temp_incident_date_slice[0]] = datetime.strptime(date['incident_date'], "%Y-%m-%d hh:mm [am|pm]")
     # Convert the incident_date column to <class 'pandas._libs.tslibs.timestamps.Timestamp'>
     #   which is also datetime64[ns]
     # Either of the following approaches works, but pandas barks about it.
@@ -150,6 +149,10 @@ def convert_column_to_date(data_frame):
     # data_frame['dispatch_time'] = pd.to_datetime(data_frame['dispatch_time'], format='%H:%M:%S')
     # data_frame['time_in_service'] = pd.to_datetime(data_frame['time_in_service'], format='%H:%M:%S')
     # This is the second way:
+    # TO_DO
+    # FROM: https://stackoverflow.com/questions/32375471/pandas-convert-strings-to-time-without-date
+    # # c = pd.Series(['10:23', '12:17', '14:46'])
+    # # pd.to_datetime(c, format='%H:%M') - pd.to_datetime(c, format='%H:%M').dt.normalize()
     data_frame['incident_date'] = pd.to_datetime(data_frame.loc[:, 'incident_date'], format='%m/%d/%y')
     data_frame['dispatch_time'] = pd.to_datetime(data_frame.loc[:, 'dispatch_time'], format='%H:%M:%S')
     data_frame['time_in_service'] = pd.to_datetime(data_frame.loc[:, 'time_in_service'], format='%H:%M:%S')
@@ -176,7 +179,7 @@ def get_only_dates(data_frame):
         date.split(' ')
 
 
-# Press the green button in the gutter to run the script.
+# Press the green button in the top gutter to run the script.
 if __name__ == '__main__':
     # Enforce a minimum Python version
     min_major_version = 3
@@ -189,7 +192,7 @@ if __name__ == '__main__':
     #csv_data_filename: str = create_target_csv_data_file(csv_data_filename_suffix)
     # Get the source csv file and assign it to a dataframe called emergency_data
     # Enter the path to the raw data file here:
-    e_data_file = Path("./2023-01-21_emerg_data_organized.csv")
+    e_data_file = Path("./2023-02-16_emerg_data_organized.csv")
     # Read the data into a Pandas dataframe
     if e_data_file.exists():
         emergency_data_all = pd.read_csv(e_data_file, sep=',')
@@ -202,7 +205,7 @@ if __name__ == '__main__':
     # print(f"Initial data_description of the data: ")
     # data_description(emergency_data)
     # print_separator_line()
-    temp_data_frame = emergency_data.head(10)
+    temp_data_frame = emergency_data  # .head(10)
     ## temp_data_frame = emergency_data
     # We need the .copy() below to stop Pandas from complaining with
     # "SettingWithCopyWarning" for the pd.to_datetime in convert_column_to_date()
