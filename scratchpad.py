@@ -3,7 +3,7 @@
 #    for a while.  The *_time columns are a mess.
 #  incident_date --> remove bogus time, convert date to pd.date
 #  response_level
-#  call_type
+#  call_type --> See: https://en.wikipedia.org/wiki/Medical_Priority_Dispatch_System
 #  Unit_Dispatch_Times --> isolate "team" and "time" components
 #  Unit_Enroute_Times --> isolate "team" and "time" components
 #  Unit_Arrive_Times --> isolate "team" and "time" components
@@ -99,11 +99,6 @@ def convert_column_to_date(data_frame):
         temp_incident_date = f"{data_frame.loc[index, 'incident_date']}"
         data_frame.loc[index, 'incident_date'] = temp_incident_date.split(' ', 1)[0]
         ### data_frame.loc[index, 'incident_date'] = pd.to_datetime(data_frame.loc[index, 'incident_date']) # # datetime.datetime.strptime(data_frame.loc[index, 'incident_date'], "%m/%d/%y")
-        # print(f'Overview of the data {data_frame.info()}')
-        # print(f"{(data_frame.loc[index, 'incident_date']).strftime('%d/%m/%y')}")
-        # print(f"{(data_frame.loc[index, 'incident_date'])}")
-        # print(f"{type(data_frame.loc[index, 'incident_date'])}")
-        # print(temp_incident_date_slice[0])
         # date[temp_incident_date_slice[0]] = datetime.strptime(date['incident_date'], "%Y-%m-%d hh:mm [am|pm]")
     # Convert the incident_date column to <class 'pandas._libs.tslibs.timestamps.Timestamp'>
     #   which is also datetime64[ns]
@@ -150,12 +145,13 @@ if __name__ == '__main__':
     # Read the data into a Pandas dataframe
     if e_data_file.exists():
         emergency_data = pd.read_csv(e_data_file, sep=',')
-    # replacing nan values in Unit_Dispatch_Times with "None"
+    # replacing nan values in call_type and Unit_Dispatch_Times with "None"
     # From: https://www.geeksforgeeks.org/python-pandas-dataframe-fillna-to-replace-null-values-in-dataframe/
+    emergency_data["call_type"].fillna("None", inplace=True)
     emergency_data["Unit_Dispatch_Times"].fillna("None", inplace=True)
     # How many rows & columns are there? What are the column names & types?
     # data_description(emergency_data)
-    ## temp_data_frame = emergency_data.head(10)
+    # temp_data_frame = emergency_data.head(10)
     temp_data_frame = emergency_data
     # We need the .copy() below to stop Pandas from complaining with
     # "SettingWithCopyWarning" for the pd.to_datetime in convert_column_to_date()
@@ -168,6 +164,11 @@ if __name__ == '__main__':
     while length > counter:
         # map each to a dictionary
         temp_values = ""
+        # call_type is column 7
+        call_type_dict = {}
+        temp_str_call_type_dict = temp_data_frame_w_dates.values[counter][7]
+        # stringified_call_type_times: str = ""
+        # stringified_call_type_times = str(temp_str_call_type_dict)
         stringified_unit_dispatch_times: str = ""
         # stringified_unit_dispatch_times = ""
         stringified_unit_time_in_service_times_dict: str = ""
@@ -219,7 +220,7 @@ if __name__ == '__main__':
             ## print("The resultant dictionary is: ", unit_dispatch_times_dict)
             for i in sorted(unit_dispatch_times_dict.keys()):
                 ## print(f"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\t{i} -> {unit_dispatch_times_dict[i]} and time_in_service was {unit_time_in_service_times_dict[i]}")
-                csv_string = f"\"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\",\"{i}\",\"{unit_dispatch_times_dict[i]}\",\"{unit_time_in_service_times_dict[i]}\"\n"
+                csv_string = f"\"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\",\"{i}\",\"{temp_data_frame_w_dates.loc[counter, 'call_type'].strip()}\",\"{unit_dispatch_times_dict[i]}\",\"{unit_time_in_service_times_dict[i]}\"\n"
                 emergency_data_list.append(csv_string)
                 # print(f"The type for {unit_dispatch_times_dict[i]} is {type(unit_dispatch_times_dict[i])}")
                 diff = unit_dispatch_times_dict[i] + unit_time_in_service_times_dict[i]
@@ -228,9 +229,11 @@ if __name__ == '__main__':
             # print("The resultant dictionary is: ", unit_dispatch_times_dict)
             counter += 1
 
+    # Header row for csv file:
+    csv_header_string = f"\"incident_date\",\"response_unit\",\"call_type\",\"dispatch_time\",\"time_in_service\"\n"
     # create a text file for writing
     with open(csv_data_filename, 'a') as f:
-        # dump the data into the CSV file
+        f.writelines(csv_header_string)
         f.writelines(emergency_data_list)
 
         """
@@ -238,4 +241,16 @@ if __name__ == '__main__':
             print(f'{type(key)}')
         counter += 1
     """
+    # print(f'{emergency_data.head()}')
+    target_file = 'headers.py'
+    try:
+        fprUtil = shutil.which(target_file)
+    except shutil.Error as err:
+        raise Exception(f'{err}')
+    if fprUtil is None:
+        print(f'Did not find {target_file} in the path. Returned: {fprUtil}')
+    else:
+        print(f'Found: {fprUtil}')
+    report_end(dir_path)
 
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
