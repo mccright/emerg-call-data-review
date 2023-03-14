@@ -233,3 +233,9 @@ https://pynecone.io/docs/getting-started/introduction
 https://pynecone.io/docs/library  
 https://pynecone.io/docs/hosting/deploy  
 https://pynecone.io/docs/gallery  
+
+Review these:  
+* "GreyKite : Time Series Forecasting in Python." By Akshay Gupta, 2021-05-30  https://www.analyticsvidhya.com/blog/2021/05/greykite-time-series-forecasting-in-python/  
+and https://github.com/linkedin/greykite  
+* "A comprehensive beginner’s guide to create a Time Series Forecast (with Codes in Python and R)."  By Aarshay Jain, 2016-02-06  https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/  
+
