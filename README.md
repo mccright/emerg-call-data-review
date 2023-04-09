@@ -227,6 +227,7 @@ https://www.parliament.vic.gov.au/images/stories/committees/paec/2016-17_Perform
 
 
 ### ToDo:  
+Experiment with the code at: https://github.com/DataForScience/Timeseries using the notes that I took in the "Times Series Analysis for Everyone: Introduction" class and the content at: https://data4sci.com/timeseries.  
 Try writing the scripting so that it can be hosted using Pynecone - "performant, customizable web apps in pure Python."  https://github.com/pynecone-io/pynecone  
 >Pynecone is a full-stack Python framework that makes it easy to build and deploy web apps in minutes. All the information for getting started can be found in this README. However, a more detailed explanation of the following topics can be found on our website:  
 https://pynecone.io/docs/getting-started/introduction  
