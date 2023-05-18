@@ -101,6 +101,10 @@ def data_description(data_frame):
     print(desc)
     print_separator_line()
     # Now describe each column
+    ## ToDo: Add the following two columns:
+    #  Unit_Enroute_Times --> isolate "team" and "time" components
+    #  Unit_Arrive_Times --> isolate "team" and "time" components
+    ##
     # calling describe method
     desc = temp_data_frame_w_dates["incident_date"].describe(percentiles=perc, include=include, datetime_is_numeric=True)
     # display
@@ -108,12 +112,14 @@ def data_description(data_frame):
     print_separator_line()
     #
     desc = temp_data_frame_w_dates["response_unit"].describe(percentiles=perc, include=include)
+    # desc = temp_data_frame_w_dates.response_unit.describe(percentiles=perc, include=include, datetime_is_numeric=True)
     # per: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html
     print(f"{desc}")
 
     print_separator_line()
     #
     desc = temp_data_frame_w_dates["call_type"].describe(percentiles=perc, include=include)
+    # desc = temp_data_frame_w_dates.response_unit.describe(percentiles=perc, include=include, datetime_is_numeric=True)
     # per: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html
     print(f"{desc}")
 
@@ -129,6 +135,10 @@ def data_description(data_frame):
 
 
 def convert_column_to_date(data_frame):
+    ## ToDo: Add the following two columns:
+    #  Unit_Enroute_Times --> isolate "team" and "time" components
+    #  Unit_Arrive_Times --> isolate "team" and "time" components
+    ##
     for index in data_frame.index:
         # Remove the bogus time from the incident_date column
         temp_incident_date = f"{data_frame.loc[index, 'incident_date']}"
@@ -139,6 +149,13 @@ def convert_column_to_date(data_frame):
         # Remove the bogus date from the time_in_service column
         temp_time_in_service = f"{data_frame.loc[index, 'time_in_service']}"
         data_frame.loc[index, 'time_in_service'] = temp_time_in_service.split(' ', 1)[0]
+        ### data_frame.loc[index, 'incident_date'] = pd.to_datetime(data_frame.loc[index, 'incident_date']) # # datetime.datetime.strptime(data_frame.loc[index, 'incident_date'], "%m/%d/%y")
+        # print(f'Overview of the data {data_frame.info()}')
+        # print(f"{(data_frame.loc[index, 'incident_date']).strftime('%d/%m/%y')}")
+        # print(f"{(data_frame.loc[index, 'incident_date'])}")
+        # print(f"{type(data_frame.loc[index, 'incident_date'])}")
+        # print(temp_incident_date_slice[0])
+        # date[temp_incident_date_slice[0]] = datetime.strptime(date['incident_date'], "%Y-%m-%d hh:mm [am|pm]")
     # Convert the incident_date column to <class 'pandas._libs.tslibs.timestamps.Timestamp'>
     #   which is also datetime64[ns]
     # Either of the following approaches works, but pandas barks about it.
@@ -192,7 +209,7 @@ if __name__ == '__main__':
     #csv_data_filename: str = create_target_csv_data_file(csv_data_filename_suffix)
     # Get the source csv file and assign it to a dataframe called emergency_data
     # Enter the path to the raw data file here:
-    e_data_file = Path("./2023-02-16_emerg_data_organized.csv")
+    e_data_file = Path("./2023-02-28_emerg_data_organized.csv")
     # Read the data into a Pandas dataframe
     if e_data_file.exists():
         emergency_data_all = pd.read_csv(e_data_file, sep=',')
