@@ -99,6 +99,11 @@ def convert_column_to_date(data_frame):
         temp_incident_date = f"{data_frame.loc[index, 'incident_date']}"
         data_frame.loc[index, 'incident_date'] = temp_incident_date.split(' ', 1)[0]
         ### data_frame.loc[index, 'incident_date'] = pd.to_datetime(data_frame.loc[index, 'incident_date']) # # datetime.datetime.strptime(data_frame.loc[index, 'incident_date'], "%m/%d/%y")
+        # print(f'Overview of the data {data_frame.info()}')
+        # print(f"{(data_frame.loc[index, 'incident_date']).strftime('%d/%m/%y')}")
+        # print(f"{(data_frame.loc[index, 'incident_date'])}")
+        # print(f"{type(data_frame.loc[index, 'incident_date'])}")
+        # print(temp_incident_date_slice[0])
         # date[temp_incident_date_slice[0]] = datetime.strptime(date['incident_date'], "%Y-%m-%d hh:mm [am|pm]")
     # Convert the incident_date column to <class 'pandas._libs.tslibs.timestamps.Timestamp'>
     #   which is also datetime64[ns]
@@ -149,6 +154,10 @@ if __name__ == '__main__':
     # From: https://www.geeksforgeeks.org/python-pandas-dataframe-fillna-to-replace-null-values-in-dataframe/
     emergency_data["call_type"].fillna("None", inplace=True)
     emergency_data["Unit_Dispatch_Times"].fillna("None", inplace=True)
+    ## ToDo: Add the following two columns:
+    #  Unit_Enroute_Times --> isolate "team" and "time" components
+    #  Unit_Arrive_Times --> isolate "team" and "time" components
+    ##
     # How many rows & columns are there? What are the column names & types?
     # data_description(emergency_data)
     # temp_data_frame = emergency_data.head(10)
@@ -162,6 +171,10 @@ if __name__ == '__main__':
     counter = 0
     length = len(temp_data_frame_w_dates)
     while length > counter:
+        ## ToDo: Add the following two columns:
+        #  Unit_Enroute_Times --> Column 9; isolate "team" and "time" components
+        #  Unit_Arrive_Times --> Column 10; isolate "team" and "time" components
+        ##
         # map each to a dictionary
         temp_values = ""
         # call_type is column 7
@@ -195,6 +208,10 @@ if __name__ == '__main__':
             # using strip() and split()  methods
         # Also need data in the 'Time_In_Service column', the 17th column
         # Checking the seventeenth column for 'none' - not very portable
+        ## ToDo: Add the following two columns:
+        #  Unit_Enroute_Times --> Column 9; isolate "team" and "time" components
+        #  Unit_Arrive_Times --> Column 10; isolate "team" and "time" components
+        ##
         if temp_data_frame_w_dates.values[counter][17] == "None":
             # Skip the nulls
             counter += 1
@@ -230,6 +247,10 @@ if __name__ == '__main__':
             counter += 1
 
     # Header row for csv file:
+    ## ToDo: Add the following two columns:
+    #  Unit_Enroute_Times --> Column 9; isolate "team" and "time" components
+    #  Unit_Arrive_Times --> Column 10; isolate "team" and "time" components
+    ##
     csv_header_string = f"\"incident_date\",\"response_unit\",\"call_type\",\"dispatch_time\",\"time_in_service\"\n"
     # create a text file for writing
     with open(csv_data_filename, 'a') as f:
