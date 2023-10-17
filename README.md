@@ -242,4 +242,5 @@ Review these:
 and https://github.com/linkedin/greykite  
 * "A comprehensive beginner’s guide to create a Time Series Forecast (with Codes in Python and R)."  By Aarshay Jain, 2016-02-06  https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/  
 * functime is a Python library for production-ready global forecasting and time-series feature engineering (*comes with time-series preprocessing (box-cox, differencing etc), cross-validation splitters (expanding and sliding window), and forecast metrics (MASE, SMAPE etc)*) [https://github.com/descendant-ai/functime](https://github.com/descendant-ai/functime)  
+* weightedcalcs: A pandas-based Python library for calculating weighted means, medians, standard deviations, and more. [https://github.com/jsvine/weightedcalcs](https://github.com/jsvine/weightedcalcs)  
 
