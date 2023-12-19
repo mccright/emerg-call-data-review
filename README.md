@@ -676,9 +676,11 @@ There are 600 unique "call_type" strings in the universe of 19,520 multi-unit re
 | 1411| GRASFIRE |
 
 #### The top 12 "call_type" strings and their frequency (processed data)  
+```terminal
+matt@hostname:/mnt/d/test/emerg-call-data-review$ cat 2023-02-28_emerg_data_organized.csv | cut -d "," -f 3 | sort | uniq -c | sort -id | tail -12
+```
 | Occurances | string |
 |:----------:|:------:|
-|  623 | LIFTASST |
 |  755 | 32D1 |
 |  834 | CARFIRE |
 |  947 | 6D2 |
