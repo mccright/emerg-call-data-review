@@ -659,7 +659,7 @@ There are 600 unique "call_type" strings in the universe of 19,520 multi-unit re
 257 unique strings appear 2 or less times.  
 180 unique strings appear 1 time.  
 
-#### The top 12 "call_type" strings and their frequency  
+#### The top 12 "call_type" strings and their frequency (raw data)  
 | Occurances | string |
 |:------:|:------:|
 | 390 | 29B1 |
@@ -674,6 +674,23 @@ There are 600 unique "call_type" strings in the universe of 19,520 multi-unit re
 | 960 | ALS |
 | 972 | FIREA |
 | 1411| GRASFIRE |
+
+#### The top 12 "call_type" strings and their frequency (processed data)  
+| Occurances | string |
+|:----------:|:------:|
+|  623 | LIFTASST |
+|  755 | 32D1 |
+|  834 | CARFIRE |
+|  947 | 6D2 |
+| 1063 | STILL |
+| 1069 | 29B1 |
+| 1157 | FIREC |
+| 1230 | FIREA |
+| 1505 | ALS |
+| 1670 | RSALARM |
+| 1740 | MEDLE |
+| 2028 | GRASFIRE |
+| 2075 | 29D2P |
 
 #### Incident Dates Distribution:  
 ```terminal
