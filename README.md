@@ -291,9 +291,10 @@ matt@hostname:/mnt/d/test/emerg-call-data-review$ cat 2023-02-28_emerg_data_orga
 matt@hostname:/mnt/d/test/emerg-call-data-review$
 ```
 
-## Some Column Data Summarized  
-### call_type  
-There are 600 unique "call_type" strings in the universe of 19,520 records.  
+### Some Column Data Summarized  
+
+#### call_type  
+There are 600 unique "call_type" strings in the universe of 19,520 multi-unit records.  
 9 unique strings appear 400 or more times.  
 13 unique strings appear 300 or more times.  
 20 unique strings appear 200 or more times.  
@@ -322,7 +323,7 @@ There are 600 unique "call_type" strings in the universe of 19,520 records.
 | 972 | FIREA |
 | 1411| GRASFIRE |
 
-Incident Dates Distribution:  
+#### Incident Dates Distribution:  
 ```terminal
 Name: incident_date, dtype: object
 count                            43915
@@ -338,7 +339,7 @@ min                2010-01-01 00:00:00
 max                2020-12-31 00:00:00
 ```
 
-Dispatch Times Distribution:  
+#### Dispatch Times Distribution:  
 ```terminal
 Name: dispatch_time, dtype: object
 count                            43915
@@ -354,7 +355,7 @@ min                           00:00:06
 max                           23:59:59
 ```
 
-Time in Service Distribution:  
+#### Time in Service Distribution:  
 ```terminal
 Name: time_in_service, dtype: object
 count                            43915
@@ -370,7 +371,7 @@ min                           00:00:00
 max                           19:19:00
 ```
 
-### response_level  
+#### response_level (raw)  
 0  
 4  
 8  
