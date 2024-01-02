@@ -6,10 +6,12 @@ First pass at the raw data from AM.
 
 ### How often are Lincoln Fire and Rescue (LFR) ambulances responding to calls in the County?  
 ```terminal
-	It would very useful to know what percentage of total annual calls outside of city limits are responded to by LFR units.  
+	It would very useful to know what percentage of total annual \
+	calls outside of city limits are responded to by LFR units.  
 	Is this changing over time?  
 	Does the percentage drop when a rural agency starts an ambulance service? etc  
-	LFR Ambulances are noted by "M," signifying "Medic" followed by a number.  These include:  
+	LFR Ambulances are noted by "M," signifying "Medic" followed by a number.  
+	These include:  
 		M1, M2, M3, M5, M6, M7, M8, M10, M21, M24, M25
 		There may be other M-units listed in the data, but my sense is that those are typos or are very rarely called and will not affect the general sense of the data.
 ```
@@ -18,14 +20,35 @@ First pass at the raw data from AM.
 ```terminal
 	Response time is defined as "Unit_arrive_times" minus "Unit_dispatch_time".  
 	All units from the same department are considered to have the same dispatch time.
-	I'm interested in all County units with the suffix 10, 11 or 12, which denotes an ambulance.
+	I'm interested in all County units with the suffix 10, 11 or 12, \
+	which denotes an ambulance.
 	County Departments are:
 		WAVE, SW, SE, HICK, MALC, RAYM, BENN, HALL, PLEA, FIRT
 	"Major Calls" are "call_type":
-		 That include "Sub Category" C (Charlie), D (Delta), or E (Echo) as defined by the file "110520 Master Run Sheet.xlsx"
+		 That include "Sub Category" C (Charlie), D (Delta), or E (Echo) \
+		 as defined by the file "110520 Master Run Sheet.xlsx"
 		call_type:
 			FIREC, GRASFIRE, RSALARM, ECHO, CARFIRE, MEDC, MEDD, MEDE
 ```
+
+### What is the median response time on major fire, grass fire, and car fire calls each year?  
+```terminal
+	Response time is defined as "Unit_arrive_times" minus "Unit_dispatch_time".  
+	All units from the same department are considered to have the same dispatch time.  
+	Call types FIREC, GRASFIRE and CARFIRE (i.e., fire, grass fire, and car fire) \
+	will not typically draw an ambulance response so there will be no arrival \
+	data for unit XX10,11,12.  
+	For these fire calls we want arrival time for the first APPARATUS, not person. \
+	Often, XX1 will be first on scene to determine the nature of emergency and \
+	communicate with incoming personnel, but we want to know when the first truck \
+	arrives.  
+	This could be XX30s (pumper), XX40s (tanker), XX20s (grass rig), or possibly XX60s.  
+		call_type:
+			FIREC, GRASFIRE, CARFIRE
+
+```
+
+
 
 This is a subset of the call data. There are 19,520 records. Records include dates from Jan. 2010 through Dec. 2020. 
 Assume that all records are anonymous. 
