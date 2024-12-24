@@ -1,6 +1,6 @@
 # Review Raw Emergency Call Data  
 
-First pass at the raw data from AM.
+First pass at the Lancaster County Emergency Response (LCER) raw data from AM.
 
 ## Initial Mission:  
 
@@ -30,6 +30,8 @@ First pass at the raw data from AM.
 		call_type:
 			FIREC, GRASFIRE, RSALARM, ECHO, CARFIRE, MEDC, MEDD, MEDE
 ```
+Reminder: in a Pandas environment get basic statistics about the dataframe with ```df.describe() ``` and get mean of a specific column with ```df["columnname"].mean()```  
+
 
 ### What is the median response time on major fire, grass fire, and car fire calls each year?  
 ```terminal
