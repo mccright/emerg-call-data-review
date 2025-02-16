@@ -2,7 +2,7 @@
 
 ## Input Data:  
 
-The original data 19,521 rows that included columns having variable length lists of '*tag-value*' pairs (```response_unit=<time_of_day>,response_unit=<time_of_day>,etc...```) (*think Python dictionary*) and some fields without data or with ```NULL``` values.  It appeared that the *tag-value* pairs in some columns were intended to be tightly coupled to *tag-value* pairs in other columns -- but some weren't. These issues (*and others*) made analysis of the original data a material challenge, and led to the decision to reformat and *clean* the data to support more effective analysis.
+The original data 19,521 rows that included columns having variable length lists of '*tag-value*' pairs (```response_unit=<time_of_day>,response_unit=<time_of_day>,etc...```) (*think Python dictionary*) and some fields without data or with ```NULL``` values.  It appeared that the *tag-value* pairs in some columns were intended to be tightly coupled to *tag-value* pairs in other columns -- but some weren't. These issues (*and others*) made analysis of the original data a material challenge, and led to the decision to reformat and *clean* the data so that any given row was associated with a given ```incident``` for a given ```response_unit``` that included ```call_type```, ```dispatch_time```, ```enroute_time```, ```arrive_time```, and ```time_in_service``` data to support more effective analysis.  
 
 ### The original data looked like:  
 ```terminal
@@ -78,7 +78,7 @@ Process finished with exit code 0
 
 
 
-First pass at the Lancaster County Emergency Response (LCER) raw data from AM.
+First pass at the Lancaster County Emergency Response (LCER) raw data from AM.  
 
 ## Initial Mission:  
 
