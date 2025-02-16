@@ -38,9 +38,9 @@ Report Output Files: C:\Files\dev\pycharm\emerg-call-data-timeseries-temp\2025-0
 Process finished with exit code 0
 ```
 
-* [optimize_data_set_step_two.py](optimize_data_set_step_two.py) ingests the organized data from [main_step_one.py] above, and adds columns for the year of each record, and for each column that contains a ```time``` value, it converts the value into a ```seconds``` value to make it easier to do math and comparisons with the original *times*.  
+* [optimize_data_set_step_two.py](optimize_data_set_step_two.py) ingests the organized data from [main_step_one.py](main_step_one.py) above, and adds columns for the year of each record, and for each column that contains a ```time``` value, it converts the value into a ```seconds``` value to make it easier to do math and comparisons with the original *times*.  
 
-It runs faster than the [main_step_one.py] and ends with a short end-of-processing report like that below:  
+It runs faster than the [main_step_one.py](main_step_one.py) and ends with a short end-of-processing report like that below:  
 ```terminal
 - - - - - - - - - - - - - - - - - - - - - - - -
 C:\Files\dev\pycharm\emerg-call-data-timeseries-temp\optimize_data_set.py
@@ -71,14 +71,14 @@ Process finished with exit code 0
 ```
 
 
-* [csv-to-sqlite_using-sqlite3.py](csv-to-sqlite_using-sqlite3.py) is used to create [2025-02-13_emerg_data_organized_via_sqlite3.db].  
+* [csv-to-sqlite_using-sqlite3.py](https://github.com/mccright/emerg-call-data-database/blob/main/csv-to-sqlite_using-sqlite3.py) is used to create [2025-02-13_emerg_data_organized_via_sqlite3.db](https://github.com/mccright/emerg-call-data-database/blob/main/2025-02-13_emerg_data_organized_via_sqlite3.db).  
 
 
 
 
+-----
 
-
-First pass at the Lancaster County Emergency Response (LCER) raw data from AM.  
+*First pass at the Lancaster County Emergency Response (LCER) raw data from AM.*  
 
 ## Initial Mission:  
 
