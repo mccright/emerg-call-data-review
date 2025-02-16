@@ -2,9 +2,9 @@
 
 ## Input Data:  
 
-The original data 
+The original data 19,521 rows that included columns having variable length lists of '*tag-value*' pairs (```response_unit=<time_of_day>,response_unit=<time_of_day>,etc...```) (*think Python dictionary*) and some fields without data or with ```NULL``` values.  It appeared that the *tag-value* pairs in some columns were intended to be tightly coupled to *tag-value* pairs in other columns -- but some weren't. These issues (*and others*) made analysis of the original data a material challenge, and led to the decision to reformat and *clean* the data to support more effective analysis.
 
-It looked like:
+### The original data looked like:  
 ```terminal
 fdid,incident_num,incident_date,Mutual_Aid_FDID,Mutual_Aid_State,Mutual_Aid_Incident_Num,response_level,call_type,Unit_Dispatch_Times,Unit_Enroute_Times,Unit_Arrive_Times,Unit_At_Patient_Times,Unit_Enroute_To_Hospital_Times,Unit_Arrive_At_Hospital_Times,Unit_Staging_Times,Unit_Fire_Out_Times,Unit_Clear_Times,Time_In_Service,disposition_remarks
 15555,10000015,1/1/10 12:00 AM,NULL,NULL,NULL,MC,MEDLE,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,
@@ -54,7 +54,7 @@ Report Output Files: C:\Files\dev\pycharm\emerg-call-data-timeseries-temp\2025-0
 Process finished with exit code 0
 ```
 
-At this point the data looks like this:  
+### The 'clean' data looks like this:  
 ```terminal
 "incident_date","incident_date_year_only","response_unit","call_type","dispatch_time","dispatch_time_in_seconds","enroute_time","enroute_time_in_seconds","arrive_time","arrive_time_in_seconds","time_in_service","time_in_service_in_seconds"
 "2010-01-01","2010","WAVE12","33C2","06:51:33","24693","07:03:23","25403","07:06:23","25583","01:26:48","5208"
