@@ -54,24 +54,48 @@ Report Output Files: C:\Files\dev\pycharm\emerg-call-data-timeseries-temp\2025-0
 Process finished with exit code 0
 ```
 
+
+* Now calculate the response times and insert columns to document them in seconds and human-freindly hh:mm:ss formats.  Use: [add_response_time_columns_step_three.py](https://github.com/mccright/emerg-call-data-review/blob/main/add_response_time_columns_step_three.py)
+It runs in seconds, not minutes...  
+
+It outputs the data in the following format:
+```terminal
+RangeIndex: 22829 entries, 0 to 22828
+Data columns (total 14 columns):
+ #   Column                      Non-Null Count  Dtype 
+---  ------                      --------------  ----- 
+ 0   incident_date               22829 non-null  object
+ 1   incident_date_year_only     22829 non-null  int64 
+ 2   response_unit               22829 non-null  object
+ 3   call_type                   22829 non-null  object
+ 4   dispatch_time               22829 non-null  object
+ 5   dispatch_time_in_seconds    22829 non-null  int64 
+ 6   enroute_time                22829 non-null  object
+ 7   enroute_time_in_seconds     22829 non-null  int64 
+ 8   arrive_time                 22829 non-null  object
+ 9   arrive_time_in_seconds      22829 non-null  int64 
+ 10  response_time_in_seconds    22829 non-null  int64 
+ 11  response_time               22829 non-null  object
+ 12  time_in_service             22829 non-null  object
+ 13  time_in_service_in_seconds  22829 non-null  int64 
+dtypes: int64(6), object(8)
+```
+
+
 ### The 'clean' data looks like this:  
 ```terminal
-"incident_date","incident_date_year_only","response_unit","call_type","dispatch_time","dispatch_time_in_seconds","enroute_time","enroute_time_in_seconds","arrive_time","arrive_time_in_seconds","time_in_service","time_in_service_in_seconds"
-"2010-01-01","2010","WAVE12","33C2","06:51:33","24693","07:03:23","25403","07:06:23","25583","01:26:48","5208"
-"2010-01-01","2010","WAVE11","28C4","08:05:59","29159","08:06:00","29160","08:08:21","29301","00:59:47","3587"
-"2010-01-01","2010","MWM31","17A1","09:51:58","35518","10:04:41","36281","10:18:57","37137","02:08:33","7713"
-"2010-01-01","2010","PLEA1","17A1","09:51:58","35518","09:57:20","35840","09:59:24","35964","00:40:12","2412"
-"2010-01-01","2010","SE1","19D1","15:48:32","56912","15:48:53","56933","15:53:29","57209","00:20:35","1235"
-"2010-01-01","2010","SE12","19D1","15:58:26","57506","15:53:39","57219","15:58:29","57509","00:33:07","1987"
-"2010-01-02","2010","8707","FIREC","02:02:55","7375","02:02:59","7379","02:59:41","10781","02:48:52","10132"
-"2010-01-02","2010","CERE1","FIREC","01:41:51","6111","01:45:11","6311","01:51:58","6718","02:58:42","10722"
-"2010-01-02","2010","RAYM1","FIREC","01:46:16","6376","01:50:42","6642","02:07:09","7629","01:52:36","6756"
-"2010-01-02","2010","WAVE1","FIREC","01:46:16","6376","01:50:45","6645","02:19:25","8365","01:07:18","4038"
+incident_date	incident_date_year_only	response_unit	call_type	dispatch_time	dispatch_time_in_seconds	enroute_time	enroute_time_in_seconds	arrive_time	arrive_time_in_seconds	response_time_in_seconds	response_time	time_in_service	time_in_service_in_seconds
+2010-01-01	2010	WAVE12	33C2	06:51:33	24693	07:03:23	25403	07:06:23	25583	890	00:14:50	01:26:48	5208
+2010-01-01	2010	WAVE11	28C4	08:05:59	29159	08:06:00	29160	08:08:21	29301	142	00:02:22	00:59:47	3587
+2010-01-01	2010	MWM31	17A1	09:51:58	35518	10:04:41	36281	10:18:57	37137	1619	00:26:59	02:08:33	7713
+2010-01-01	2010	PLEA1	17A1	09:51:58	35518	09:57:20	35840	09:59:24	35964	446	00:07:26	00:40:12	2412
+2010-01-01	2010	SE1	19D1	15:48:32	56912	15:48:53	56933	15:53:29	57209	297	00:04:57	00:20:35	1235
+
 
 ```
 
 
-* [csv-to-sqlite_using-sqlite3.py](https://github.com/mccright/emerg-call-data-database/blob/main/csv-to-sqlite_using-sqlite3.py) is used to create [2025-02-13_emerg_data_organized_via_sqlite3.db](https://github.com/mccright/emerg-call-data-database/blob/main/2025-02-13_emerg_data_organized_via_sqlite3.db).  
+* [csv-to-sqlite_using-sqlite3.py](https://github.com/mccright/emerg-call-data-database/blob/main/csv-to-sqlite_using-sqlite3.py) is used to create [2025-03-20_emerg_data_organized_via_sqlite3.db](https://github.com/mccright/emerg-call-data-database/blob/main/2025-03-20_emerg_data_organized_via_sqlite3.db).  
 
 
 
