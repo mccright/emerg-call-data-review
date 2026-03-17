@@ -5,7 +5,9 @@
 # This script will emit a csv file with the following columns:
 #     incident_date
 #     incident_date_year_only
+#     incident_num
 #     response_unit
+#     response_level
 #     call_type
 #     dispatch_time
 #     dispatch_time_in_seconds
@@ -13,6 +15,8 @@
 #     enroute_time_in_seconds
 #     arrive_time
 #     arrive_time_in_seconds
+#     response_time
+#     response_time_in_seconds
 #     time_in_service
 #     time_in_service_in_seconds
 
@@ -36,6 +40,7 @@ start_utc = datetime.datetime.now(datetime.timezone.utc)
 dir_path = os.getcwd()
 
 _LOGGER = logging.getLogger(__name__)
+SECONDS_IN_A_DAY: int = (24 * 60 * 60)
 
 
 def create_target_csv_data_file(csvfile_suffix: str) -> object:
@@ -201,6 +206,29 @@ def add_seconds_column_from_time_column(data_frame: pd.DataFrame, column: str ):
     return data_frame
 
 
+def add_response_time_column(data_frame: pd.DataFrame, arrive_seconds: int, dispatch_seconds: int ):
+    """
+    Convert Pandas datetime 'datetime64[ns]' to seconds 'int'
+    Columns: "arrive_seconds","dispatch_seconds"
+    :type data_frame: object
+    :type column: pd.Int64Dtype
+    """
+    if arrive_seconds > dispatch_seconds:
+        inner_time_to_arrival: int = arrive_seconds - dispatch_seconds
+    else:
+        inner_time_to_arrival: int = (arrive_seconds + SECONDS_IN_A_DAY) - dispatch_seconds
+    # Create 'time_in_seconds' column name
+    #response_time_in_seconds = str(column) + "_in_seconds"
+    # Assume DataFrame time column is in hh:mm:ss format
+    # Convert the 'time' column to timedelta
+    data_frame[column] = pd.to_timedelta(data_frame[column])
+    # Convert timedelta to seconds
+    data_frame[time_in_seconds] = data_frame[column].dt.total_seconds().astype(int)
+    # print(f"{data_frame}")
+    # Convert the 'date_column' column to just hh:mm:ss format in-place
+    data_frame[column] = data_frame[column].astype(str).str.replace('0 days ', '')
+    return data_frame
+
 def get_only_dates(data_frame):
     dates = data_frame['incident_date']
     for date in dates:
@@ -263,12 +291,13 @@ if __name__ == '__main__':
     minimum_py(min_major_version, min_minor_version)
     # Use a set: collection of unordered unique elements without duplicates {}
     emergency_data_list = []
-    csv_data_filename_suffix: str = 'emerg_data_date_is_now_year_new_time_in_seconds_columns_optimized.csv'
+    # csv_data_filename_suffix: str = 'emerg_data_date_is_now_year_new_time_in_seconds_columns_optimized.csv'
+    csv_data_filename_suffix: str = 'emerg_data_date_to_year_add_time_in_seconds_columns_step_two.csv'
     csv_data_filename: object = create_target_csv_data_file(csv_data_filename_suffix)
     # Get the source csv file and assign it to a dataframe called emergency_data
     # Enter the path to the raw data file here:
     ## e_data_file = Path("./data/rvfd-calls-for-service-Jan-2010.csv")
-    e_data_file = Path("./2024-12-11_emerg_data_organized.csv")
+    e_data_file = Path("./2025-07-31_emerg_data_organized_step_one.csv")
     # Read the data into a Pandas dataframe
     if e_data_file.exists():
         emergency_data: DataFrame = pd.read_csv(e_data_file, sep=',')
@@ -313,7 +342,9 @@ if __name__ == '__main__':
 
         csv_string: str = (f"\"{temp_data_frame_w_dates.loc[counter, 'incident_date']}\","
                            f"\"{temp_data_frame_w_dates.loc[counter, 'incident_date_year_only']}\","
+                           f"\"{temp_data_frame_w_dates.loc[counter, 'incident_num']}\","
                            f"\"{temp_data_frame_w_dates.loc[counter, 'response_unit']}\","
+                           f"\"{temp_data_frame_w_dates.loc[counter, 'response_level']}\","
                            f"\"{temp_data_frame_w_dates.loc[counter, 'call_type'].strip()}\","
                            f"\"{temp_data_frame_w_dates.loc[counter, 'dispatch_time']}\","
                            f"\"{temp_data_frame_w_dates.loc[counter, 'dispatch_time_in_seconds']}\","
@@ -327,7 +358,7 @@ if __name__ == '__main__':
         counter += 1
 
     # Header row for csv file:
-    csv_header_string = f"\"incident_date\",\"incident_date_year_only\",\"response_unit\",\"call_type\",\"dispatch_time\",\"dispatch_time_in_seconds\",\"enroute_time\",\"enroute_time_in_seconds\",\"arrive_time\",\"arrive_time_in_seconds\",\"time_in_service\",\"time_in_service_in_seconds\"\n"
+    csv_header_string = f"\"incident_date\",\"incident_date_year_only\",\"incident_num\",\"response_unit\",\"response_level\",\"call_type\",\"dispatch_time\",\"dispatch_time_in_seconds\",\"enroute_time\",\"enroute_time_in_seconds\",\"arrive_time\",\"arrive_time_in_seconds\",\"time_in_service\",\"time_in_service_in_seconds\"\n"
     # create a text file for writing
     outputfilelength = len(emergency_data_list)
     with open(csv_data_filename, "a+") as f:

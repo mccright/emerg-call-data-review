@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="2025-08-01_emerg_data_organized_via_sqlite3.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="4385"/><column_width id="4" width="0"/><expanded_item id="0" parent="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="emergency_calls" custom_title="0" dock_id="4" table="4,15:mainemergency_calls"/><dock_state state="000000ff00000000fd00000001000000020000035e0000024bfc0100000003fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f007700730065003201000000000000035e0000000000000000fb000000160064006f0063006b00420072006f007700730065003401000000000000035e0000015c00ffffff0000035e0000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="emergency_calls" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="39"/><column index="2" value="85"/><column index="3" value="146"/><column index="4" value="85"/><column index="5" value="87"/><column index="6" value="91"/><column index="7" value="70"/><column index="8" value="83"/><column index="9" value="300"/><column index="10" value="87"/><column index="11" value="156"/><column index="12" value="84"/><column index="13" value="152"/><column index="14" value="73"/><column index="15" value="141"/><column index="16" value="159"/><column index="17" value="90"/><column index="18" value="97"/><column index="19" value="165"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="BCD_Only">select * FROM emergency_calls
+WHERE sub_category = &quot;bravo&quot; or
+sub_category = &quot;charlie&quot; or
+sub_category = &quot;delta&quot;</sql><sql name="Median_resp_time">SELECT response_time_in_seconds
+FROM 'emergency_calls' 
+ORDER BY response_time_in_seconds
+LIMIT 1
+OFFSET (SELECT COUNT(response_time_in_seconds)
+        FROM 'emergency_calls') / 2</sql><sql name="Median_TiS_time">SELECT time_in_service_in_seconds
+FROM 'emergency_calls' 
+ORDER BY time_in_service_in_seconds
+LIMIT 1
+OFFSET (SELECT COUNT(time_in_service_in_seconds)
+        FROM 'emergency_calls') / 2</sql><sql name="resp_time_by_resp_unit_Ms">SELECT response_unit, call_type, sub_category, determinant_description, response_time_in_seconds, incident_num, incident_date_year_only
+FROM 'emergency_calls' 
+WHERE (response_unit IN ('M1', 'M2', 'M3', 'M5', 'M6', 'M7', 'M8', 'M10', 'M21', 'M24', 'M25', 'MALC1', 'MALC10', 'MWM31', 'MALC2'))
+AND (call_type IN ('firec', 'grassfire', 'rsalarm', 'echo', 'carfire', 'medc', 'medd', 'mede'))
+-- GROUP BY response_unit
+ORDER BY response_unit, response_time_in_seconds
+
+</sql><sql name="Median_resp_time_2">create table 'emergency_calls_subset' as select * from 'emergency_calls' where 1  1;
+SELECT AVG(response_time_in_seconds)
+FROM (SELECT response_time_in_seconds
+      FROM 'emergency_calls'
+      ORDER BY response_time_in_seconds
+      LIMIT 2 - (SELECT COUNT(response_time_in_seconds) FROM 'emergency_calls') % 2    -- odd 1, even 2
+      OFFSET (SELECT (COUNT(response_time_in_seconds) - 1) / 2
+              FROM 'emergency_calls'))</sql><sql name="SQL 6">--CREATE TABLE 'emergency_calls_subset' as SELECT * FROM 'emergency_calls' WHERE 1
+
+</sql><sql name="SQL 7*">SELECT * FROM emergency_calls
+WHERE (call_type IN ('med', 'medfa', 'medfb', 'medfc', 'medfd', 'medfe', 'medfl'))</sql><current_tab id="6"/></tab_sql></sqlb_project>

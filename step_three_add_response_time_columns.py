@@ -26,7 +26,8 @@ def calc_time_to_arrival(arrive_seconds: int, dispatch_seconds: int):
 # Small dataset:
 # df = pd.read_csv('./timestamp_testing.csv')
 # Full dataset:
-df = pd.read_csv('./2025-02-14_emerg_data_date_is_now_year_new_time_in_seconds_columns_optimized.csv')
+#df = pd.read_csv('./2025-05-12_emerg_data_date_is_now_year_new_time_in_seconds_columns_optimized.csv')
+df = pd.read_csv('./2025-08-01_emerg_data_date_to_year_add_time_in_seconds_columns_step_two.csv')
 ## df = pd.read_csv('./2024-12-11_emerg_data_organized.csv')
 # Either Filter response units ending with '11' or '12'
 filtered_df = df[df['response_unit'].str.endswith(('0', '1', '2'))]
@@ -56,10 +57,10 @@ print(f"-----------------------------------------")
 #print(f"{my_timedelta}")
 #print(f"{df['response_time_in_seconds'].describe()}")
 #print(f"{df.describe()}")
-df = df[['incident_date', 'incident_date_year_only', 'response_unit', 'call_type', 'dispatch_time', 'dispatch_time_in_seconds', 'enroute_time', 'enroute_time_in_seconds', 'arrive_time', 'arrive_time_in_seconds', 'response_time_in_seconds', 'response_time', 'time_in_service', 'time_in_service_in_seconds']]
+df = df[['incident_date', 'incident_date_year_only', 'incident_num', 'response_unit', 'response_level', 'call_type', 'dispatch_time', 'dispatch_time_in_seconds', 'enroute_time', 'enroute_time_in_seconds', 'arrive_time', 'arrive_time_in_seconds', 'response_time_in_seconds', 'response_time', 'time_in_service', 'time_in_service_in_seconds']]
 print(f"-----------------------------------------")
 #print(f"{df}")
-df.to_csv('usable_output_file.csv', encoding='utf-8', index=False, header=True)
+df.to_csv('2025-08-01_add_response_time_columns_step_three.csv', encoding='utf-8', index=False, header=True)
 #df = df.assign(time_to_arrival = time_to_arrival_list)
 """
 #for unit in response_units:

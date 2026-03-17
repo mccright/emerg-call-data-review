@@ -1,8 +1,9 @@
 # This is a rough problem-solving script.
 # I knew almost nothing about the data and needed to poke at it 
 #    for a while.  The *_time columns are a mess.
+#  incident_num --> include for SME use, 8-digit int.
 #  incident_date --> remove bogus time, convert date to pd.date
-#  response_level
+#  response_level --> include for SME use. string.
 #  call_type --> See: https://en.wikipedia.org/wiki/Medical_Priority_Dispatch_System
 #  Unit_Dispatch_Times --> isolate "team" and "time" components
 #  Unit_Enroute_Times --> isolate "team" and "time" components
@@ -232,7 +233,7 @@ if __name__ == '__main__':
     csv_data_filename: object = create_target_csv_data_file(csv_data_filename_suffix)
     # Get the source csv file and assign it to a dataframe called emergency_data
     # Enter the path to the raw data file here:
-    ## e_data_file = Path("./data/rvfd-calls-for-service-Jan-2010.csv")
+    # e_data_file = Path("./data/rvfd-calls-for-service-Jan-2010.csv")
     e_data_file = Path("./data/rvfd-calls-for-service-2010-2020.csv")
     # Read the data into a Pandas dataframe
     if e_data_file.exists():
@@ -244,6 +245,8 @@ if __name__ == '__main__':
     # 'df.method({col: value}, inplace=True)' or df[col] = df[col].method(value) instead
     # This approach works:
     # emergency_data.fillna({"call_type": "None"}, inplace=True)
+    emergency_data["incident_num"] = emergency_data["incident_num"].fillna("None")
+    emergency_data["response_level"] = emergency_data["response_level"].fillna("None")
     emergency_data["call_type"] = emergency_data["call_type"].fillna("None")
     # Old way: emergency_data["Unit_Dispatch_Times"].fillna("None", inplace=True)
     # emergency_data.fillna({"Unit_Dispatch_Times": "None"}, inplace=True)
@@ -277,6 +280,13 @@ if __name__ == '__main__':
     while length > counter:
         # map each to a dictionary
         temp_values = ""
+        # incident_num_dict is column 1
+        incident_num_dict = {}
+        temp_str_incident_num_dict = temp_data_frame_w_dates.values[counter][1]
+
+        # response_level is column 6
+        response_level_dict = {}
+        temp_str_response_level_dict = temp_data_frame_w_dates.values[counter][6]
         # call_type is column 7
         call_type_dict = {}
         temp_str_call_type_dict = temp_data_frame_w_dates.values[counter][7]
@@ -394,7 +404,7 @@ if __name__ == '__main__':
                                 # Known working, but wrong date format for SQLite
                                 # csv_string = f"\"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%m/%d/%y')}\",\"{i}\",\"{temp_data_frame_w_dates.loc[counter, 'call_type'].strip()}\",\"{unit_dispatch_times_dict[i]}\",\"{unit_enroute_times_dict[i]}\",\"{unit_arrive_times_dict[i]}\",\"{unit_time_in_service_times_dict[i]}\"\n"
                                 # Now using date format for SQLite: YYYY-MM-DD
-                                csv_string = f"\"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%Y-%m-%d')}\",\"{i}\",\"{temp_data_frame_w_dates.loc[counter, 'call_type'].strip()}\",\"{unit_dispatch_times_dict[i]}\",\"{unit_enroute_times_dict[i]}\",\"{unit_arrive_times_dict[i]}\",\"{unit_time_in_service_times_dict[i]}\"\n"
+                                csv_string = f"\"{datetime.datetime.strftime(temp_data_frame_w_dates.loc[counter, 'incident_date'], '%Y-%m-%d')}\",\"{temp_data_frame_w_dates.loc[counter, 'incident_num']}\",\"{i}\",\"{temp_data_frame_w_dates.loc[counter, 'response_level'].strip()}\",\"{temp_data_frame_w_dates.loc[counter, 'call_type'].strip()}\",\"{unit_dispatch_times_dict[i]}\",\"{unit_enroute_times_dict[i]}\",\"{unit_arrive_times_dict[i]}\",\"{unit_time_in_service_times_dict[i]}\"\n"
                                 emergency_data_list.append(csv_string)
                     #"""
                     # print(f"The type for {unit_dispatch_times_dict[i]} is {type(unit_dispatch_times_dict[i])}")
@@ -407,7 +417,7 @@ if __name__ == '__main__':
     # Header row for csv file:
     # ToDo: Add the following two columns:
     ##
-    csv_header_string = f"\"incident_date\",\"response_unit\",\"call_type\",\"dispatch_time\",\"enroute_time\",\"arrive_time\",\"time_in_service\"\n"
+    csv_header_string = f"\"incident_date\",\"incident_num\",\"response_unit\",\"response_level\",\"call_type\",\"dispatch_time\",\"enroute_time\",\"arrive_time\",\"time_in_service\"\n"
     # create a text file for writing
     # print(f"Original len(temp_data_frame_w_dates) = {length}")
     outputfilelength = len(emergency_data_list)
