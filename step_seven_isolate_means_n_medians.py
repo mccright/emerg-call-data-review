@@ -100,8 +100,8 @@ def write_to_csv(file_path, data: list):
 if __name__ == "__main__":
     # This data file path will need to be updated for your use case
     datafilepath = "2025-08-02_emerg_data_organized_step_four.csv"
-    response_time_quarterly_csv_file = "response_time_quarterly.csv"
-    response_time_yearly_csv_file = "response_time_yearly.csv"
+    response_time_quarterly_csv_file = "response_time_quarterly_step_seven.csv"
+    response_time_yearly_csv_file = "response_time_yearly_step_seven.csv"
     records = read_times(datafilepath)
     stats_4m, stats_12m = aggregate_stats(records)
     data_for_12m_csv = build_12m_stats(stats_12m)
